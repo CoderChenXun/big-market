@@ -5,92 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 抽奖前的规则链 + 抽奖中后的规则树（规则一）">
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/RedisClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/RedisClientConfigProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/strategy_award_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/strategy_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/strategy_rule_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/domain/RaffleStrategyTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/domain/StrategyArmoryDispatchTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/AwardDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/RaffleAwardEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/RaffleFactorEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/RuleActionEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/RuleMatterEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/StrategyAwardEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/StrategyEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/entity/StrategyRuleEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/RuleLimitTypeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/RuleLogicCheckTypeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/RuleTreeNodeLineVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/RuleTreeNodeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/RuleTreeVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/model/valobj/StrategyAwardRuleModelVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/repository/IStrategyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/IRaffleStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/annotation/LogicStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/armory/IStrategyArmory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/armory/IStrategyDispatch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/armory/StrategyArmoryDispatch.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/raffle/AbstractRaffleStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/raffle/DefaultRaffleStrategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/AbstractLogicChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/ILogicChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/ILogicChainArmory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/factory/DefaultChainFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/BlackListLogicChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/DefaultLogicChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/RuleWeightLogicChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/filter/ILogicFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/filter/factory/DefaultLogicFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/filter/impl/RuleBlackListLogicFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/filter/impl/RuleLockLogicFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/filter/impl/RuleWeightLogicFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/ILogicTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/factory/DefaultTreeFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/factory/engine/IDecisionTreeEngine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/factory/engine/impl/DecisionTreeEngine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLockLogicTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLuckAwardLogicTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleStockLogicTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/StrategyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IAwardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IStrategyAwardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IStrategyDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IStrategyRuleDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/Award.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/Strategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/StrategyAward.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/StrategyRule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/redis/IRedisService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/redis/RedissonService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/dev-ops/environment/redis/redis.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/rule_tree_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/rule_tree_node_line_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/rule_tree_node_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/domain/LogicTreeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RuleTreeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRuleTreeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRuleTreeNodeDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRuleTreeNodeLineDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RuleTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RuleTreeNode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RuleTreeNodeLine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/frame_case_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/award_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/adapter/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/adapter/repository/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/model/aggregate/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/model/entity/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/model/valobj/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/xxx/service/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/yyy/model/aggregate/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/yyy/model/entity/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/yyy/model/valobj/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/yyy/service/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/redis/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/common/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/common/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/enums/ResponseCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/enums/ResponseCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/dev-ops/docker-compose-app.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-app.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/dev-ops/docker-compose-environment-aliyun.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-environment-aliyun.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/dev-ops/docker-compose-environment.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-environment.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/create_sql.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/environment/mysql/sql/create_sql.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/xfg-frame-archetype.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/environment/mysql/sql/xfg-frame-archetype.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/factory/engine/impl/DecisionTreeEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/factory/engine/impl/DecisionTreeEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IStrategyAwardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IStrategyAwardDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="251209-coderlan-orm" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -134,9 +62,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java-project-code/xfg/big_market/big-market",
+    "last_opened_file_path": "D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "spring.configuration.checksum": "d87e9702065bd5a48cf4c79dac930ad6"
   },
   "keyToStringList": {
@@ -153,29 +81,29 @@
       <recent name="cn.bugstack.domain.strategy.model.valobj" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java-project-code\big-market\big-market-app\src\main\resources\mybatis\mapper" />
       <recent name="D:\java-project-code\big-market\big-market-infrastructure\src\main\java\cn\bugstack\infrastructure\redis" />
       <recent name="D:\java-project-code\big-market\big-market-app\src\main\java\cn\bugstack\config" />
-      <recent name="D:\java-project-code\big-market\big-market-app\src\main\resources\mybatis\mapper" />
       <recent name="D:\java-project-code\big-market\docs\dev-ops\mysql\sql" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java-project-code\big-market\docs\dev-ops\environment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.bugstack.infrastructure.dao.po" />
       <recent name="cn.bugstack.domain.strategy.service.rule.tree.impl" />
       <recent name="cn.bugstack.domain.strategy.service.rule.impl" />
       <recent name="cn.bugstack.test.domain" />
       <recent name="cn.bugstack.types.enums" />
-      <recent name="cn.bugstack.domain.strategy.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
+  <component name="RunManager" selected="JUnit.RuleTreeTest.test_ruleTreeNodeLine">
     <configuration name="docs_dev-ops_mysql_sql_big_market.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
       <script-file value="$PROJECT_DIR$/docs/dev-ops/mysql/sql/docs_dev-ops_mysql_sql_big_market.sql" />
       <script-mode>FILE</script-mode>
       <method v="2" />
     </configuration>
-    <configuration name="RaffleStrategyTest.test_performRaffle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="LogicTreeTest.test_tree_rule" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
@@ -184,30 +112,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.RaffleStrategyTest" />
-      <option name="METHOD_NAME" value="test_performRaffle" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.LogicTreeTest" />
+      <option name="METHOD_NAME" value="test_tree_rule" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RaffleStrategyTest.test_raffle_center_rule_lock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.RaffleStrategyTest" />
-      <option name="METHOD_NAME" value="test_raffle_center_rule_lock" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StrategyArmoryDispatchTest.test_getRandomAwardId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RuleTreeTest.test_ruleTree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
@@ -215,15 +127,15 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.StrategyArmoryDispatchTest" />
-      <option name="METHOD_NAME" value="test_getRandomAwardId" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RuleTreeTest" />
+      <option name="METHOD_NAME" value="test_ruleTree" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StrategyArmoryDispatchTest.test_getRandomAwardId_ruleWeightValue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RuleTreeTest.test_ruleTreeNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
@@ -231,9 +143,25 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.StrategyArmoryDispatchTest" />
-      <option name="METHOD_NAME" value="test_getRandomAwardId_ruleWeightValue" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RuleTreeTest" />
+      <option name="METHOD_NAME" value="test_ruleTreeNode" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RuleTreeTest.test_ruleTreeNodeLine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RuleTreeTest" />
+      <option name="METHOD_NAME" value="test_ruleTreeNodeLine" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -248,11 +176,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNodeLine" />
+        <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNode" />
+        <item itemvalue="JUnit.RuleTreeTest.test_ruleTree" />
+        <item itemvalue="JUnit.LogicTreeTest.test_tree_rule" />
         <item itemvalue="Database Script.docs_dev-ops_mysql_sql_big_market.sql" />
-        <item itemvalue="JUnit.RaffleStrategyTest.test_raffle_center_rule_lock" />
-        <item itemvalue="JUnit.RaffleStrategyTest.test_performRaffle" />
-        <item itemvalue="JUnit.StrategyArmoryDispatchTest.test_getRandomAwardId_ruleWeightValue" />
-        <item itemvalue="JUnit.StrategyArmoryDispatchTest.test_getRandomAwardId" />
       </list>
     </recent_temporary>
   </component>
@@ -274,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1765181190018</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: 抽奖前的规则链 + 抽奖中后的规则树（规则一）">
+      <created>1765423084050</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1765423084050</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,7 +226,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="251211-coderlan-logicTree-stage2" />
                       </list>
                     </value>
                   </entry>

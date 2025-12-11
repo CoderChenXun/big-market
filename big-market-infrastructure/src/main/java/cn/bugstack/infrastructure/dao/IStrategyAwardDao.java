@@ -2,7 +2,6 @@ package cn.bugstack.infrastructure.dao;
 
 import cn.bugstack.infrastructure.dao.po.StrategyAward;
 import org.apache.ibatis.annotations.Mapper;
-
 import java.util.List;
 
 
