@@ -3,7 +3,9 @@ package cn.bugstack.domain.strategy.repository;
 import cn.bugstack.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
+import cn.bugstack.domain.strategy.model.valobj.RuleTreeVO;
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 
 import java.util.List;
 import java.util.Map;
@@ -26,4 +28,16 @@ public interface IStrategyRepository {
     String queryStrategyRuleValue(Long strategyId, String ruleModel);
 
     StrategyAwardRuleModelVO queryStrategyAwardRuleModels(Long strategyId, Integer awardId);
+
+    RuleTreeVO queryRuleTreeVo(String treeId);
+
+    void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount);
+
+    Boolean subtractionAwardStock(String cachedKey);
+
+    void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
+
+    StrategyAwardStockKeyVO takeQueueValue();
+
+    void updateStrategyAwardStock(Long strategyId, Integer awardId);
 }

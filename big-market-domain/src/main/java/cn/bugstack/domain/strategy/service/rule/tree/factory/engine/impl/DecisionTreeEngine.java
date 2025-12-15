@@ -27,8 +27,8 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     }
 
     @Override
-    public DefaultTreeFactory.StrategyAwardData process(String userId, Long strategyId, Integer awardId) {
-        DefaultTreeFactory.StrategyAwardData strategyAwardData = null;
+    public DefaultTreeFactory.StrategyAwardVO process(String userId, Long strategyId, Integer awardId) {
+        DefaultTreeFactory.StrategyAwardVO strategyAwardData = null;
 
         // 获取根节点的基础信息
         String nextNode = ruleTreeVO.getTreeRootRuleNode();
@@ -41,9 +41,10 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
             ILogicTreeNode logicTreeNode = logicTreeNodeGroup.get(ruleTreeNode.getRuleKey());
 
             // 决策节点进行计算
-            DefaultTreeFactory.TreeActionEntity treeActionEntity = logicTreeNode.logic(userId, strategyId, awardId);
+            DefaultTreeFactory.TreeActionEntity treeActionEntity = logicTreeNode.logic(userId, strategyId, awardId,ruleTreeNode.getRuleValue());
+            // 根据决策后的结果选择下一个节点进行决策
             RuleLogicCheckTypeVO ruleLogicCheckTypeVO = treeActionEntity.getRuleLogicCheckType();
-            strategyAwardData = treeActionEntity.getStrategyAwardData();
+            strategyAwardData = treeActionEntity.getStrategyAwardVO();
             log.info("决策树引擎【{}】treeId:{} node:{} code:{}", ruleTreeVO.getTreeName(), ruleTreeVO.getTreeId(), nextNode, ruleLogicCheckTypeVO.getCode());
 
             // 根据 决策类型 和 当前节点与子节点的连线list 获取下一个节点
@@ -71,6 +72,7 @@ public class DecisionTreeEngine implements IDecisionTreeEngine {
     }
 
     public boolean decisionLogic(String matterValue, RuleTreeNodeLineVO nodeLine) {
+        // matterValue是决策的物料，nodeLine.getRuleLimitType()是决策的规则类型
         switch (nodeLine.getRuleLimitType()) {
             case EQUAL:
                 return matterValue.equals(nodeLine.getRuleLimitValue().getCode());

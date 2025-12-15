@@ -36,4 +36,12 @@
         where strategy_id = #{strategyId}
           and award_id = #{awardId}
     </select>
+
+<!--    void updateStrategyAwardStock(StrategyAward strategyAwardReq);-->
+    <update id="updateStrategyAwardStock" parameterType="cn.bugstack.infrastructure.dao.po.StrategyAward">
+        update strategy_award
+        set award_count_surplus = award_count_surplus - 1
+        where strategy_id = #{strategyId}
+          and award_id = #{awardId} and award_count_surplus > 0
+    </update>
 </mapper>

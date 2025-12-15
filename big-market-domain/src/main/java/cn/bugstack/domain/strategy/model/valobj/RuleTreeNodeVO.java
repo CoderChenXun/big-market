@@ -15,7 +15,7 @@ public class RuleTreeNodeVO {
     /**
      * 规则树id
      */
-    private Integer treeId;
+    private String treeId;
 
     /**
      * 规则key

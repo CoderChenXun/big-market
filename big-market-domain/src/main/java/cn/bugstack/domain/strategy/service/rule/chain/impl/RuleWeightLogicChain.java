@@ -3,6 +3,7 @@ package cn.bugstack.domain.strategy.service.rule.chain.impl;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
 import cn.bugstack.domain.strategy.service.armory.IStrategyDispatch;
 import cn.bugstack.domain.strategy.service.rule.chain.AbstractLogicChain;
+import cn.bugstack.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
 import cn.bugstack.types.common.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -24,13 +25,11 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
     }
 
     @Override
-    public Integer logic(String userId, Long strategyId) {
+    public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
         // 1. 查询value_weight规则在Strategy_rule表中对应的rule_value
         String ruleWeightValue = repository.queryStrategyRuleValue(strategyId, ruleModel());
 
         Map<Long, String> ruleWeightMap = getAnalyticalValue(ruleWeightValue);
-
-        //  ruleWeightMap为：{1=[101, 102], 2=[103, 104]}
         ArrayList<Long> ruleWeightValueList = new ArrayList<>(ruleWeightMap.keySet());
         // 对ruleWeightValueSet进行排序
         Collections.sort(ruleWeightValueList);
@@ -44,7 +43,10 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
         }
         Integer awardId = strategyDispatch.getRandomAwardId(strategyId, ruleWeightMap.get(nextValue));
         log.info("抽奖责任链-权重接管 userId: {} strategyId: {} ruleModel: {} awardId: {}", userId, strategyId, ruleModel(), awardId);
-        return awardId;
+        return DefaultChainFactory.StrategyAwardVO.builder()
+                .awardId(awardId)
+                .logicModel(ruleModel())
+                .build();
     }
 
     private Map<Long, String> getAnalyticalValue(String ruleWeightValue) {

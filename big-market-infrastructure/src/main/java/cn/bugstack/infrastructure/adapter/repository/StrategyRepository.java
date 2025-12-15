@@ -3,25 +3,22 @@ package cn.bugstack.infrastructure.adapter.repository;
 import cn.bugstack.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
-import cn.bugstack.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
+import cn.bugstack.domain.strategy.model.valobj.*;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
-import cn.bugstack.infrastructure.dao.IStrategyAwardDao;
-import cn.bugstack.infrastructure.dao.IStrategyDao;
-import cn.bugstack.infrastructure.dao.IStrategyRuleDao;
-import cn.bugstack.infrastructure.dao.po.Strategy;
-import cn.bugstack.infrastructure.dao.po.StrategyAward;
-import cn.bugstack.infrastructure.dao.po.StrategyRule;
+import cn.bugstack.infrastructure.dao.*;
+import cn.bugstack.infrastructure.dao.po.*;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.common.Constants;
-import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBlockingQueue;
+import org.redisson.api.RDelayedQueue;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Repository
 public class StrategyRepository implements IStrategyRepository {
 
@@ -36,6 +33,15 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Resource
     private IStrategyRuleDao strategyRuleDao;
+
+    @Resource
+    private IRuleTreeDao ruleTreeDao;
+
+    @Resource
+    private IRuleTreeNodeDao ruleTreeNodeDao;
+
+    @Resource
+    private IRuleTreeNodeLineDao ruleTreeNodeLineDao;
 
     /**
      * 通过策略id查询策略奖品
@@ -165,5 +171,118 @@ public class StrategyRepository implements IStrategyRepository {
         return StrategyAwardRuleModelVO.builder()
                 .ruleModels(strategyAwardRes.getRuleModels())
                 .build();
+    }
+
+    @Override
+    public RuleTreeVO queryRuleTreeVo(String treeId) {
+        // 优先从缓存获取
+        String cacheKey = Constants.RedisKey.RULE_TREE_VO_KEY + treeId;
+        RuleTreeVO ruleTreeVOCache = redisService.getValue(cacheKey);
+        if (null != ruleTreeVOCache) return ruleTreeVOCache;
+
+        // 1. 查询出treeId对应的树
+        RuleTree ruleTree = ruleTreeDao.queryRuleTreeByTreeId(treeId);
+        List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryRuleTreeNodeByTreeId(treeId);
+        List<RuleTreeNodeLine> ruleTreeNodeLines = ruleTreeNodeLineDao.queryRuleTreeNodeLineByTreeId(treeId);
+
+        // 2.1 组装出formNode ——》 List<RuleTreeNodeLine>的Map
+        Map<String, List<RuleTreeNodeLineVO>> ruleTreeNodeLineMap = new HashMap<>();
+        for (RuleTreeNodeLine ruleTreeNodeLine : ruleTreeNodeLines){
+            // 转换为RuleTreeNodeLineVO
+            RuleTreeNodeLineVO ruleTreeNodeLineVO = RuleTreeNodeLineVO.builder()
+                    .treeId(ruleTreeNodeLine.getTreeId())
+                    .ruleNodeFrom(ruleTreeNodeLine.getRuleNodeFrom())
+                    .ruleNodeTo(ruleTreeNodeLine.getRuleNodeTo())
+                    .ruleLimitType(RuleLimitTypeVO.valueOf(ruleTreeNodeLine.getRuleLimitType()))
+                    .ruleLimitValue(RuleLogicCheckTypeVO.valueOf(ruleTreeNodeLine.getRuleLimitValue()))
+                    .build();
+            List<RuleTreeNodeLineVO> ruleTreeNodeLineVOS = ruleTreeNodeLineMap.computeIfAbsent(ruleTreeNodeLine.getRuleNodeFrom(), k -> new ArrayList<>());
+            ruleTreeNodeLineVOS.add(ruleTreeNodeLineVO);
+        }
+
+        // tree node转换为Map结构
+        Map<String, RuleTreeNodeVO> treeNodeMap = new HashMap<>();
+        for (RuleTreeNode ruleTreeNode : ruleTreeNodes) {
+            // 转换为RuleTreeNodeVO
+            RuleTreeNodeVO ruleTreeNodeVO = RuleTreeNodeVO.builder()
+                    .treeNodeLineVOList(ruleTreeNodeLineMap.get(ruleTreeNode.getRuleKey()))
+                    .treeId(ruleTreeNode.getTreeId())
+                    .ruleDesc(ruleTreeNode.getRuleDesc())
+                    .ruleValue(ruleTreeNode.getRuleValue())
+                    .ruleKey(ruleTreeNode.getRuleKey())
+                    .build();
+            treeNodeMap.putIfAbsent(ruleTreeNode.getRuleKey(), ruleTreeNodeVO);
+        }
+
+        // 将ruleTree转换为Vo
+        RuleTreeVO ruleTreeVO = RuleTreeVO.builder()
+                .treeId(ruleTree.getTreeId())
+                .treeName(ruleTree.getTreeName())
+                .treeDesc(ruleTree.getTreeDesc())
+                .treeRootRuleNode(ruleTree.getTreeNodeRuleKey())
+                .treeNodeMap(treeNodeMap)
+                .build();
+
+        redisService.setValue(cacheKey, ruleTreeVO);
+        return ruleTreeVO;
+    }
+
+    @Override
+    public void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount) {
+        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_KEY +  strategyId + Constants.UNDERLINE + awardId;
+        if(redisService.isExists(cachedKey)){
+            return;
+        }
+        redisService.setAtomicLong(cachedKey, awardCount);
+    }
+
+    @Override
+    public Boolean subtractionAwardStock(String cachedKey) {
+        // 1. 首先检查redis缓存是否有该key
+        // 1.1 没有则返回false
+        if (!redisService.isExists(cachedKey)) {
+            return false;
+        }
+        // 1.2 存在则减库存
+        long surPlus = redisService.decr(cachedKey);
+        if(surPlus < 0){
+            // 库存为0个，恢复为0
+            redisService.setValue(cachedKey, 0);
+            return false;
+        }
+
+        // 2. 锁住当前库存
+        String lockedKey = cachedKey + Constants.UNDERLINE + surPlus;
+        Boolean setNx = redisService.setNx(lockedKey);
+        if(!setNx){
+            log.info("策略奖品库存加锁失败 {}", lockedKey);
+        }
+        return setNx;
+    }
+
+    @Override
+    public void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO) {
+        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        // 将扣减库存时间存入到阻塞队列中
+        RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
+        RDelayedQueue<StrategyAwardStockKeyVO> delayedQueue = redisService.getDelayedQueue(blockingQueue);
+        delayedQueue.offer(strategyAwardStockKeyVO,3, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public StrategyAwardStockKeyVO takeQueueValue() {
+        // 1. 组装缓存key
+        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
+        return blockingQueue.poll();
+    }
+
+    @Override
+    public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
+        // 1. 根据strategyId和awardId更新奖品库存
+        StrategyAward strategyAwardReq = new StrategyAward();
+        strategyAwardReq.setStrategyId(strategyId);
+        strategyAwardReq.setAwardId(awardId);
+        strategyAwardDao.updateStrategyAwardStock(strategyAwardReq);
     }
 }

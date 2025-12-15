@@ -13,7 +13,7 @@ public class RuleTreeNodeLineVO {
     /**
      * 规则树ID
      */
-    private Long treeId;
+    private String treeId;
 
     /**
      * 规则key节点from
