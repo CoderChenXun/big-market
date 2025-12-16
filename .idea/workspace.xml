@@ -5,20 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 抽奖中后的规则树链（阶段二）--orm">
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityAccountDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityOrderDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityCount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityCountFlow.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="251216-coderlan-controller" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -193,11 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RaffleStrategyTest.test_performRaffle" />
-        <item itemvalue="JUnit.RaffleStrategyTest.test_raffle_center_rule_lock" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNodeLine" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNode" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTree" />
+        <item itemvalue="JUnit.RaffleStrategyTest.test_raffle_center_rule_lock" />
+        <item itemvalue="JUnit.RaffleStrategyTest.test_performRaffle" />
       </list>
     </recent_temporary>
   </component>
@@ -233,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1765441172920</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置">
+      <created>1765889125208</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1765889125208</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -250,7 +245,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="251211-coderlan-logicTree-stage2" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -282,7 +277,8 @@
     <MESSAGE value="feat: 【营销服务】库表设计" />
     <MESSAGE value="feat: 抽奖前的规则链 + 抽奖中后的规则树（规则一）" />
     <MESSAGE value="feat: 抽奖中后的规则树链（阶段二）--orm" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 抽奖中后的规则树链（阶段二）--orm" />
+    <MESSAGE value="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
