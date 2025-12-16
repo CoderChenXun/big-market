@@ -12,4 +12,6 @@ public interface IStrategyAwardDao {
     StrategyAward queryStrategyAwardRuleModels(StrategyAward strategyAwardReq);
 
     void updateStrategyAwardStock(StrategyAward strategyAwardReq);
+
+    StrategyAward queryStrategyAwardEntity(StrategyAward strategyAwardReq);
 }

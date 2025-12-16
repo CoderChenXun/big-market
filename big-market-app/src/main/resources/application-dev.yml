@@ -55,3 +55,9 @@ redis:
       retry-interval: 1000
       ping-interval: 60000
       keep-alive: true
+
+# 跨域配置
+app:
+  config:
+    cross-origin: '*'
+    api-version: v1
