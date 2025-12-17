@@ -11,17 +11,20 @@
         <id column="order_id" property="orderId"/>
         <id column="order_time" property="orderTime"/>
         <id column="state" property="state"/>
+        <id column="total_count" property="totalCount"/>
+        <id column="day_count" property="dayCount"/>
+        <id column="month_count" property="monthCount"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityOrder">
-        insert into raffle_activity_order(user_id, activity_id, activity_name, strategy_id, order_id, order_time, state, create_time, update_time)
-        values(#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{state},now(),now())
+        insert into raffle_activity_order(user_id, activity_id, activity_name, strategy_id, order_id, order_time, state,total_count, day_count, month_count, create_time, update_time)
+        values(#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{state},total_count, day_count, month_count, now(),now())
     </insert>
 
     <select id="queryRaffleActivityOrderByUserId" parameterType="java.lang.String" resultMap="DataMap">
-        select id, user_id, activity_id, activity_name, strategy_id, order_id, order_time, state
+        select id, user_id, activity_id, activity_name, strategy_id, order_id, order_time, state,total_count, day_count, month_count
         from raffle_activity_order
         where user_id = #{userId}
     </select>

@@ -4,20 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 抽奖中后的规则树链（阶段二）--orm">
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_account_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_flow_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RaffleActivityDaoTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RaffleActivityOrderDaoTest.java" afterDir="false" />
+    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试">
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_sku_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/aggregate/CreateOrderAggregate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityAccountEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityCountEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityOrderEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityShopCartEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivitySkuEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/valobj/ActivityStateVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/valobj/OrderStateVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/repository/IActivityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/AbstractRaffleActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/IRaffleOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/RaffleActivityService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivitySkuDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivitySku.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_flow_mapper.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityCountFlow.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +86,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "spring.configuration.checksum": "d87e9702065bd5a48cf4c79dac930ad6"
   },
   "keyToStringList": {
@@ -100,14 +112,14 @@
       <recent name="D:\java-project-code\big-market\docs\dev-ops\environment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.bugstack.infrastructure.dao" />
       <recent name="cn.bugstack.infrastructure.dao.po" />
-      <recent name="cn.bugstack.domain.strategy.service.rule.tree.impl" />
-      <recent name="cn.bugstack.domain.strategy.service.rule.impl" />
-      <recent name="cn.bugstack.test.domain" />
-      <recent name="cn.bugstack.types.enums" />
+      <recent name="cn.bugstack.domain.activity.model.aggregate" />
+      <recent name="cn.bugstack.domain.activity.model.entity" />
+      <recent name="cn.bugstack.domain.activity.model.valobj" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId">
+  <component name="RunManager" selected="JUnit.RaffleActivityDaoTest.test_queryRaffleActivityByActivityId">
     <configuration name="RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -197,9 +209,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" />
         <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId" />
         <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_insert" />
-        <item itemvalue="JUnit.RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNodeLine" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNode" />
       </list>
@@ -244,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1765889125208</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试">
+      <created>1765937757249</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1765937757249</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +313,8 @@
     <MESSAGE value="feat: 抽奖前的规则链 + 抽奖中后的规则树（规则一）" />
     <MESSAGE value="feat: 抽奖中后的规则树链（阶段二）--orm" />
     <MESSAGE value="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置" />
+    <MESSAGE value="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
