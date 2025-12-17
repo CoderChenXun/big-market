@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IRaffleActivityCountFlowDao">
+
+    <resultMap id="DataMap" type="cn.bugstack.infrastructure.dao.po.RaffleActivityCountFlow">
+        <id column="id" property="id"/>
+        <id column="user_id" property="userId"/>
+        <id column="activity_id" property="activityId"/>
+        <id column="total_count" property="totalCount"/>
+        <id column="day_count" property="dayCount"/>
+        <id column="month_count" property="monthCount"/>
+        <id column="flow_id" property="flowId"/>
+        <id column="flow_channel" property="flowChannel"/>
+        <id column="biz_id" property="bizId"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityCountFlow">
+        insert into raffle_activity_count_flow (user_id, activity_id, total_count, day_count, month_count, flow_id, flow_channel, biz_id, create_time, update_time)
+        values (#{userId}, #{activityId}, #{totalCount}, #{dayCount}, #{monthCount}, #{flowId}, #{flowChannel}, #{bizId}, now(), now())
+    </insert>
+
+    <select id="queryActivityOrderByUserId" parameterType="java.lang.String" resultMap="DataMap">
+        select user_id, activity_id, total_count, day_count, month_count, flow_id, flow_channel, biz_id
+        from raffle_activity_count_flow
+        where user_id = #{userId}
+    </select>
+
+</mapper>

@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 抽奖中后的规则树链（阶段二）--orm">
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_account_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_flow_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_count_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RaffleActivityDaoTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RaffleActivityOrderDaoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityCountFlowDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +29,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -48,25 +60,29 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;d87e9702065bd5a48cf4c79dac930ad6&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "d87e9702065bd5a48cf4c79dac930ad6"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -91,40 +107,8 @@
       <recent name="cn.bugstack.types.enums" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RaffleStrategyTest.test_performRaffle">
-    <configuration name="RaffleStrategyTest.test_performRaffle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.RaffleStrategyTest" />
-      <option name="METHOD_NAME" value="test_performRaffle" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RaffleStrategyTest.test_raffle_center_rule_lock" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.RaffleStrategyTest" />
-      <option name="METHOD_NAME" value="test_raffle_center_rule_lock" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RuleTreeTest.test_ruleTree" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId">
+    <configuration name="RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
@@ -133,8 +117,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RuleTreeTest" />
-      <option name="METHOD_NAME" value="test_ruleTree" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityDaoTest" />
+      <option name="METHOD_NAME" value="test_queryRaffleActivityByActivityId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RaffleActivityOrderDaoTest.test_insert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityOrderDaoTest" />
+      <option name="METHOD_NAME" value="test_insert" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityOrderDaoTest" />
+      <option name="METHOD_NAME" value="test_queryRaffleActivityOrderByUserId" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -181,11 +197,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId" />
+        <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_insert" />
+        <item itemvalue="JUnit.RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNodeLine" />
         <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNode" />
-        <item itemvalue="JUnit.RuleTreeTest.test_ruleTree" />
-        <item itemvalue="JUnit.RaffleStrategyTest.test_raffle_center_rule_lock" />
-        <item itemvalue="JUnit.RaffleStrategyTest.test_performRaffle" />
       </list>
     </recent_temporary>
   </component>
@@ -245,7 +261,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="251216-coderlan-fix-db-router" />
                       </list>
                     </value>
                   </entry>

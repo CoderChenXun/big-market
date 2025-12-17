@@ -22,7 +22,7 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/cn.bugstack.middleware/db-router-spring-boot-starter -->
+<!--         https://mvnrepository.com/artifact/cn.bugstack.middleware/db-router-spring-boot-starter -->
         <dependency>
             <groupId>cn.bugstack.middleware</groupId>
             <artifactId>db-router-spring-boot-starter</artifactId>

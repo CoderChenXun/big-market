@@ -33,5 +33,5 @@ public class RaffleActivityOrder {
     private Date createTime;
 
     /** 更新时间 */
-    private Date update_time;
+    private Date updateTime;
 }
