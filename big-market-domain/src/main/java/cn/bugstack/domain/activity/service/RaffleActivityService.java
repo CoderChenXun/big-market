@@ -1,12 +1,56 @@
 package cn.bugstack.domain.activity.service;
 
+import cn.bugstack.domain.activity.model.aggregate.CreateOrderAggregate;
+import cn.bugstack.domain.activity.model.entity.*;
+import cn.bugstack.domain.activity.model.valobj.OrderStateVO;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
+import cn.bugstack.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.stereotype.Service;
 
-public class RaffleActivityService extends AbstractRaffleActivity{
+import java.util.Date;
 
-    public RaffleActivityService(IActivityRepository activityRepository) {
-        super(activityRepository);
+@Service
+public class RaffleActivityService extends AbstractRaffleActivity {
+
+    public RaffleActivityService(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
+        super(activityChainFactory, activityRepository);
     }
 
 
+    @Override
+    protected void doSaveOrder(CreateOrderAggregate createOrderAggregate) {
+        // 保存订单对象
+        activityRepository.doSaveOrder(createOrderAggregate);
+    }
+
+    @Override
+    protected CreateOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivityEntity activityEntity, ActivitySkuEntity activitySkuEntity, ActivityCountEntity activityCountEntity) {
+        // 1. 订单实体对象
+        ActivityOrderEntity activityOrderEntity = new ActivityOrderEntity();
+        activityOrderEntity.setUserId(skuRechargeEntity.getUserId());
+        activityOrderEntity.setSku(activitySkuEntity.getSku());
+        activityOrderEntity.setActivityId(activityEntity.getActivityId());
+        activityOrderEntity.setActivityName(activityEntity.getActivityName());
+        // 从活动实体对象中获取策略ID
+        activityOrderEntity.setStrategyId(activityEntity.getStrategyId());
+        // 公司里一般会有专门的雪花算法UUID服务，我们这里直接生成个12位就可以了
+        activityOrderEntity.setOrderId(RandomStringUtils.randomNumeric(12));
+        activityOrderEntity.setOrderTime(new Date());
+        activityOrderEntity.setTotalCount(activityCountEntity.getTotalCount());
+        activityOrderEntity.setDayCount(activityCountEntity.getDayCount());
+        activityOrderEntity.setMonthCount(activityCountEntity.getMonthCount());
+        activityOrderEntity.setState(OrderStateVO.completed);
+        activityOrderEntity.setOutBusinessNo(skuRechargeEntity.getOutBusinessNo());
+
+        // 构造聚合对象
+        return CreateOrderAggregate.builder()
+                .userId(skuRechargeEntity.getUserId())
+                .activityId(activityEntity.getActivityId())
+                .totalCount(activityCountEntity.getTotalCount())
+                .dayCount(activityCountEntity.getDayCount())
+                .monthCount(activityCountEntity.getMonthCount())
+                .activityOrderEntity(activityOrderEntity)
+                .build();
+    }
 }

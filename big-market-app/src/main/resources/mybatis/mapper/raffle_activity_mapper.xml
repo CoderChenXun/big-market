@@ -16,7 +16,13 @@
     </resultMap>
 
     <select id="queryRaffleActivityByActivityId" parameterType="java.lang.Long" resultMap="dataMap">
-        select activity_id, activity_name, activity_desc, begin_date_time, end_date_time, strategy_id, state
+        select activity_id,
+               activity_name,
+               activity_desc,
+               begin_date_time,
+               end_date_time,
+               strategy_id,
+               state
         from raffle_activity
         where activity_id = #{activityId}
     </select>
