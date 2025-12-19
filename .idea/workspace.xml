@@ -5,29 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat: 活动领域--抽奖活动订单流程设计，进行库表的改造（去除活动流水表，添加Sku表）">
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/domain/RaffleOrderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/SkuRechargeEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/RaffleActivitySupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/AbstractActionChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/IActionChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/IActionChainArmory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/factory/DefaultActivityChainFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivityBaseActionChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivitySkuStockActionChain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/ActivityRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/infrastructure/RaffleActivityServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/event/ActivitySkuStockZeroMessageEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/valobj/ActivitySkuStockKeyVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/ISkuStock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/armory/ActivityArmoryDispatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/armory/IActivityArmory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/armory/IActivityDispatch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/event/EventPublisher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/job/UpdateSkuStockJob.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/listener/ActivitySkuStockZeroConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/event/BaseEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_account_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_account_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_order_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/aggregate/CreateOrderAggregate.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/aggregate/CreateOrderAggregate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityOrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/model/entity/ActivityOrderEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_sku_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_sku_mapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/repository/IActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/repository/IActivityRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/AbstractRaffleActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/AbstractRaffleActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/IRaffleOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/IRaffleOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/RaffleActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/RaffleActivityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityAccountDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityAccountDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/RaffleActivityOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivityBaseActionChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivityBaseActionChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivitySkuStockActionChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/rule/impl/ActivitySkuStockActionChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/ActivityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/ActivityRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivitySkuDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivitySkuDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/listener/package-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,36 +65,36 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="36YQ4T4hhYFnftedZtzBEdnZ9Wa" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java-project-code/xfg/big_market/big-market",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "spring.configuration.checksum": "d87e9702065bd5a48cf4c79dac930ad6"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java-project-code/xfg/big_market/big-market&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d87e9702065bd5a48cf4c79dac930ad6&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -109,14 +112,14 @@
       <recent name="D:\java-project-code\big-market\docs\dev-ops\environment" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.bugstack.types.event" />
+      <recent name="cn.bugstack.trigger.job" />
       <recent name="cn.bugstack.domain.activity.service.rule" />
       <recent name="cn.bugstack.infrastructure.dao" />
       <recent name="cn.bugstack.infrastructure.dao.po" />
-      <recent name="cn.bugstack.domain.activity.model.aggregate" />
-      <recent name="cn.bugstack.domain.activity.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RaffleOrderTest.test_createSkuRechargeOrder">
+  <component name="RunManager" selected="JUnit.RaffleActivityServiceTest.test_createSkuRechargeOrder">
     <configuration name="RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -128,22 +131,6 @@
       <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
       <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityDaoTest" />
       <option name="METHOD_NAME" value="test_queryRaffleActivityByActivityId" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RaffleActivityOrderDaoTest.test_insert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityOrderDaoTest" />
-      <option name="METHOD_NAME" value="test_insert" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -165,6 +152,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RaffleActivityServiceTest.test_assembleActivitySku" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityServiceTest" />
+      <option name="METHOD_NAME" value="test_assembleActivitySku" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RaffleActivityServiceTest.test_createSkuRechargeOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RaffleActivityServiceTest" />
+      <option name="METHOD_NAME" value="test_createSkuRechargeOrder" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RaffleOrderTest.test_createSkuRechargeOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -181,22 +200,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RuleTreeTest.test_ruleTreeNodeLine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.infrastructure.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.infrastructure" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.infrastructure.RuleTreeTest" />
-      <option name="METHOD_NAME" value="test_ruleTreeNodeLine" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="big-market-app" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="cn.bugstack.Application" />
@@ -206,11 +209,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RaffleActivityServiceTest.test_createSkuRechargeOrder" />
+        <item itemvalue="JUnit.RaffleActivityServiceTest.test_assembleActivitySku" />
         <item itemvalue="JUnit.RaffleOrderTest.test_createSkuRechargeOrder" />
         <item itemvalue="JUnit.RaffleActivityDaoTest.test_queryRaffleActivityByActivityId" />
         <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_queryRaffleActivityOrderByUserId" />
-        <item itemvalue="JUnit.RaffleActivityOrderDaoTest.test_insert" />
-        <item itemvalue="JUnit.RuleTreeTest.test_ruleTreeNodeLine" />
       </list>
     </recent_temporary>
   </component>
@@ -278,7 +281,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="251218-coderlan-activity-sku-stock-consistent" />
                       </list>
                     </value>
                   </entry>
@@ -312,7 +315,24 @@
     <MESSAGE value="feat: 抽奖中后的规则树链（阶段二）--orm" />
     <MESSAGE value="feat: 第二阶段-活动领域的库表实现 + db-router分库分表的依赖配置" />
     <MESSAGE value="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 活动领域--编写Dao数据访问接口、编写xml文件和分库分表的测试" />
+    <MESSAGE value="feat: 活动领域--抽奖活动流水入库：下单sku给自己的活动账户充值可参与的额度次数" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 活动领域--抽奖活动流水入库：下单sku给自己的活动账户充值可参与的额度次数" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/armory/ActivityArmoryDispatch.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/armory/ActivityArmoryDispatch.java</url>
+          <line>36</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

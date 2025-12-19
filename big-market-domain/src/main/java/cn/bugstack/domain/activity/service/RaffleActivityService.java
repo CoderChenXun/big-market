@@ -2,6 +2,7 @@ package cn.bugstack.domain.activity.service;
 
 import cn.bugstack.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.activity.model.entity.*;
+import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.bugstack.domain.activity.model.valobj.OrderStateVO;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
 import cn.bugstack.domain.activity.service.rule.factory.DefaultActivityChainFactory;
@@ -52,5 +53,30 @@ public class RaffleActivityService extends AbstractRaffleActivity {
                 .monthCount(activityCountEntity.getMonthCount())
                 .activityOrderEntity(activityOrderEntity)
                 .build();
+    }
+
+    @Override
+    public ActivitySkuStockKeyVO takeQueueValue() {
+        // 读取阻塞队列的生产者数据，并返回
+        ActivitySkuStockKeyVO activitySkuStockKeyVO = activityRepository.takeQueueValue();
+        return activitySkuStockKeyVO;
+    }
+
+    @Override
+    public void updateSkuStock(Long sku) {
+        // 根据sku更新库存信息
+        activityRepository.updateSkuStock(sku);
+    }
+
+    @Override
+    public void clearActivitySkuStock(Long sku) {
+        // 清空活动sku库存信息
+        activityRepository.clearActivitySkuStock(sku);
+    }
+
+    @Override
+    public void clearQueueValue() {
+        // 清空阻塞队列信息
+        activityRepository.clearQueueValue();
     }
 }

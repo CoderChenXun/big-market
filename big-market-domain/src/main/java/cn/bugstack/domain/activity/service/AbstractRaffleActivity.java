@@ -1,7 +1,10 @@
 package cn.bugstack.domain.activity.service;
 
 import cn.bugstack.domain.activity.model.aggregate.CreateOrderAggregate;
-import cn.bugstack.domain.activity.model.entity.*;
+import cn.bugstack.domain.activity.model.entity.ActivityCountEntity;
+import cn.bugstack.domain.activity.model.entity.ActivityEntity;
+import cn.bugstack.domain.activity.model.entity.ActivitySkuEntity;
+import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
 import cn.bugstack.domain.activity.service.rule.IActionChain;
 import cn.bugstack.domain.activity.service.rule.factory.DefaultActivityChainFactory;
@@ -11,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 @Slf4j
-public abstract class AbstractRaffleActivity extends RaffleActivitySupport implements IRaffleOrder {
+public abstract class AbstractRaffleActivity extends RaffleActivitySupport implements IRaffleOrder,ISkuStock {
 
     public AbstractRaffleActivity(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
         super(activityChainFactory, activityRepository);
