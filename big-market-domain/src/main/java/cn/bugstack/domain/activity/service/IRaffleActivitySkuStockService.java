@@ -2,7 +2,7 @@ package cn.bugstack.domain.activity.service;
 
 import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 
-public interface ISkuStock {
+public interface IRaffleActivitySkuStockService {
 
     // 从阻塞队列中获取生产者生产的sku任务
     ActivitySkuStockKeyVO takeQueueValue();

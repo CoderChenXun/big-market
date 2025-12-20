@@ -1,20 +1,20 @@
-package cn.bugstack.domain.activity.service;
+package cn.bugstack.domain.activity.service.quota;
 
 import cn.bugstack.domain.activity.model.aggregate.CreateOrderAggregate;
 import cn.bugstack.domain.activity.model.entity.*;
 import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
 import cn.bugstack.domain.activity.model.valobj.OrderStateVO;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
-import cn.bugstack.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import cn.bugstack.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service
-public class RaffleActivityService extends AbstractRaffleActivity {
+public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAccountQuota {
 
-    public RaffleActivityService(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
+    public RaffleActivityAccountQuotaService(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
         super(activityChainFactory, activityRepository);
     }
 

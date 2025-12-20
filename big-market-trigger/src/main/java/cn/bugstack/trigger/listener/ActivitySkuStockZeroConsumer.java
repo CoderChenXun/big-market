@@ -1,6 +1,6 @@
 package cn.bugstack.trigger.listener;
 
-import cn.bugstack.domain.activity.service.ISkuStock;
+import cn.bugstack.domain.activity.service.IRaffleActivitySkuStockService;
 import cn.bugstack.types.event.BaseEvent;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.TypeReference;
@@ -20,7 +20,7 @@ public class ActivitySkuStockZeroConsumer {
     private String topic;
 
     @Resource
-    private ISkuStock skuStock;
+    private IRaffleActivitySkuStockService skuStock;
 
     @RabbitListener(queuesToDeclare = @Queue(value = "activity_sku_stock_zero"))
     public void listener(String  message){

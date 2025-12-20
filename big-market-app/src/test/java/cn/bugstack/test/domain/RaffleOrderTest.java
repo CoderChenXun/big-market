@@ -1,7 +1,7 @@
 package cn.bugstack.test.domain;
 
 import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
-import cn.bugstack.domain.activity.service.IRaffleOrder;
+import cn.bugstack.domain.activity.service.IRaffleActivityAccountQuotaService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class RaffleOrderTest {
 
     @Resource
-    private IRaffleOrder raffleOrder;
+    private IRaffleActivityAccountQuotaService raffleOrder;
 
     @Test
     public void test_createSkuRechargeOrder() {

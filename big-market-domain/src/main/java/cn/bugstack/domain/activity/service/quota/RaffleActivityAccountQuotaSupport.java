@@ -1,18 +1,18 @@
-package cn.bugstack.domain.activity.service;
+package cn.bugstack.domain.activity.service.quota;
 
 import cn.bugstack.domain.activity.model.entity.ActivityCountEntity;
 import cn.bugstack.domain.activity.model.entity.ActivityEntity;
 import cn.bugstack.domain.activity.model.entity.ActivitySkuEntity;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
-import cn.bugstack.domain.activity.service.rule.factory.DefaultActivityChainFactory;
+import cn.bugstack.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 
-public class RaffleActivitySupport {
+public class RaffleActivityAccountQuotaSupport {
     protected DefaultActivityChainFactory activityChainFactory;
 
     protected IActivityRepository activityRepository;
 
     // 构造器注入活动仓储
-    public RaffleActivitySupport(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
+    public RaffleActivityAccountQuotaSupport(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository) {
         this.activityChainFactory = activityChainFactory;
         this.activityRepository = activityRepository;
     }

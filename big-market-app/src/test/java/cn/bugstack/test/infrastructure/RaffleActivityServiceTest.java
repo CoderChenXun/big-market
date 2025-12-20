@@ -1,7 +1,7 @@
 package cn.bugstack.test.infrastructure;
 
 import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
-import cn.bugstack.domain.activity.service.RaffleActivityService;
+import cn.bugstack.domain.activity.service.quota.RaffleActivityAccountQuotaService;
 import cn.bugstack.domain.activity.service.armory.IActivityArmory;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.concurrent.CountDownLatch;
 public class RaffleActivityServiceTest {
 
     @Resource
-    private RaffleActivityService raffleActivityService;
+    private RaffleActivityAccountQuotaService raffleActivityService;
 
     @Resource
     private IActivityArmory activityArmory;
