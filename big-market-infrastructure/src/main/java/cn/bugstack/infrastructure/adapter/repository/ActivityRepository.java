@@ -144,7 +144,7 @@ public class ActivityRepository implements IActivityRepository {
             // 外部业务号，保证业务的幂等性
             raffleActivityOrder.setOutBusinessNo(activityOrderEntity.getOutBusinessNo());
 
-            // 更新账户对象
+            // 更新对象账户信息
             RaffleActivityAccount raffleActivityAccount = new RaffleActivityAccount();
             raffleActivityAccount.setUserId(createOrderAggregate.getUserId());
             raffleActivityAccount.setActivityId(activityOrderEntity.getActivityId());
