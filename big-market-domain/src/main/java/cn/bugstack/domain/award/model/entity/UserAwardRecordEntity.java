@@ -1,0 +1,42 @@
+package cn.bugstack.domain.award.model.entity;
+
+import cn.bugstack.domain.award.model.valobj.AwardStateVO;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class UserAwardRecordEntity {
+    /**
+     * 用户ID
+     */
+    private String userId;
+    /**
+     * 活动ID
+     */
+    private Long activityId;
+    /**
+     * 策略ID
+     */
+    private Long strategyId;
+    /**
+     * 抽奖订单Id
+     */
+    private String orderId;
+    /**
+     * 奖品ID
+     */
+    private Integer awardId;
+    /**
+     * 奖品标题
+     */
+    private String awardTitle;
+    /**
+     * 中奖时间
+     */
+    private Date awardTime;
+    /**
+     * 奖品状态；create-创建、completed-发奖完成
+     */
+    private AwardStateVO awardState;
+}

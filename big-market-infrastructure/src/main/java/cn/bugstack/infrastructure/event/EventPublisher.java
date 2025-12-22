@@ -16,12 +16,15 @@ public class EventPublisher {
     private RabbitTemplate rabbitTemplate;
 
     public void publish(String topic, BaseEvent.EventMessage<?> eventMessage){
+        publish(topic,JSON.toJSONString(eventMessage));
+    }
+
+    public void publish(String topic, String messageJson){
         try {
-            String messageJson = JSON.toJSONString(eventMessage);
             rabbitTemplate.convertAndSend(topic, messageJson);
             log.info("MQ消息发送成功 topic:{} message:{}", topic, messageJson);
         }catch (Exception e){
-            log.error("MQ消息发送失败 topic:{} message:{}", topic, JSON.toJSONString(eventMessage), e);
+            log.error("MQ消息发送失败 topic:{} message:{}", topic, messageJson, e);
             throw e;
         }
     }

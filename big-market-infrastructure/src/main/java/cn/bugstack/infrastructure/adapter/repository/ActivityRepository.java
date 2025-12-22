@@ -272,7 +272,7 @@ public class ActivityRepository implements IActivityRepository {
                 .strategyId(userRaffleOrder.getStrategyId())
                 .orderId(userRaffleOrder.getOrderId())
                 .orderTime(userRaffleOrder.getOrderTime())
-                .orderState(UserRaffleOrderStateVo.valueOf(userRaffleOrder.getOrderState()))
+                .orderState(UserRaffleOrderStateVo.valueOf(userRaffleOrder.getOrderState().toUpperCase()))
                 .build();
     }
 
