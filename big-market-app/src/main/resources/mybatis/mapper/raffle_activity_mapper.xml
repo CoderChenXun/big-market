@@ -27,5 +27,12 @@
         where activity_id = #{activityId}
     </select>
 
+    <select id="queryStrategyIdByActivityId" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivity"
+            resultMap="dataMap">
+        select strategy_id
+        from raffle_activity
+        where activity_id = #{activityId}
+    </select>
+
 
 </mapper>

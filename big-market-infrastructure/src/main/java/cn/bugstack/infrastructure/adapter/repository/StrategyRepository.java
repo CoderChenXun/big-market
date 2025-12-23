@@ -46,6 +46,9 @@ public class StrategyRepository implements IStrategyRepository {
     @Resource
     private IRuleTreeNodeLineDao ruleTreeNodeLineDao;
 
+    @Resource
+    private IRaffleActivityDao raffleActivityDao;
+
     /**
      * 通过策略id查询策略奖品
      *
@@ -322,5 +325,13 @@ public class StrategyRepository implements IStrategyRepository {
         // 3. 保存Entity对象到缓存中
         redisService.setValue(cachedKey, strategyAwardEntity);
         return strategyAwardEntity;
+    }
+
+    @Override
+    public Long queryStrategyIdByActivityId(Long activityId) {
+        RaffleActivity raffleActivityReq = new RaffleActivity();
+        raffleActivityReq.setActivityId(activityId);
+        RaffleActivity raffleActivityRes = raffleActivityDao.queryStrategyIdByActivityId(raffleActivityReq);
+        return raffleActivityRes.getStrategyId();
     }
 }

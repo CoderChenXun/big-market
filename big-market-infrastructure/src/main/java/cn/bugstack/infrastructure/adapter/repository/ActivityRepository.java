@@ -27,6 +27,7 @@ import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Repository
@@ -296,15 +297,15 @@ public class ActivityRepository implements IActivityRepository {
                             .userId(userId)
                             .activityId(activityId)
                             .build());
-                    if(1 != totalCount){
+                    if (1 != totalCount) {
                         // 回滚
                         status.setRollbackOnly();
-                        log.info("更新用户活动总账户信息失败 userId:{} activityId:{} totalCount:{}", userId,activityId, totalCount);
+                        log.info("更新用户活动总账户信息失败 userId:{} activityId:{} totalCount:{}", userId, activityId, totalCount);
                         throw new AppException(ResponseCode.ACCOUNT_QUOTA_ERROR.getCode(), ResponseCode.ACCOUNT_QUOTA_ERROR.getInfo());
                     }
 
                     // 2. 更新或插入用户活动账户月信息
-                    if(createPartakeOrderAggregate.isExistAccountMonth()){
+                    if (createPartakeOrderAggregate.isExistAccountMonth()) {
                         // 更新用户活动账户月信息
                         int totalMonthCount = raffleActivityAccountMonthDao.updateActivityAccountMonthSubtractionQuota(
                                 RaffleActivityAccountMonth.builder()
@@ -313,13 +314,13 @@ public class ActivityRepository implements IActivityRepository {
                                         .month(activityAccountMonthEntity.getMonth())
                                         .build()
                         );
-                        if(1 != totalMonthCount){
+                        if (1 != totalMonthCount) {
                             // 回滚
                             status.setRollbackOnly();
-                            log.info("更新用户活动账户月信息失败 userId:{} activityId:{} totalMonthCount:{}", userId,activityId, totalMonthCount);
+                            log.info("更新用户活动账户月信息失败 userId:{} activityId:{} totalMonthCount:{}", userId, activityId, totalMonthCount);
                             throw new AppException(ResponseCode.ACCOUNT_MONTH_QUOTA_ERROR.getCode(), ResponseCode.ACCOUNT_MONTH_QUOTA_ERROR.getInfo());
                         }
-                    }else {
+                    } else {
                         // 插入用户活动账户月信息
                         raffleActivityAccountMonthDao.insertActivityAccountMonth(
                                 RaffleActivityAccountMonth.builder()
@@ -341,7 +342,7 @@ public class ActivityRepository implements IActivityRepository {
                     }
 
                     // 3. 插入用户活动账户日信息
-                    if(createPartakeOrderAggregate.isExistAccountDay()){
+                    if (createPartakeOrderAggregate.isExistAccountDay()) {
                         int totalDayCount = raffleActivityAccountDayDao.updateActivityAccountDaySubtractionQuota(
                                 RaffleActivityAccountDay.builder()
                                         .userId(userId)
@@ -349,13 +350,13 @@ public class ActivityRepository implements IActivityRepository {
                                         .day(activityAccountDayEntity.getDay())
                                         .build()
                         );
-                        if(1 != totalDayCount){
+                        if (1 != totalDayCount) {
                             // 回滚
                             status.setRollbackOnly();
-                            log.info("更新用户活动账户日信息失败 userId:{} activityId:{} totalDayCount:{}", userId,activityId, totalDayCount);
+                            log.info("更新用户活动账户日信息失败 userId:{} activityId:{} totalDayCount:{}", userId, activityId, totalDayCount);
                             throw new AppException(ResponseCode.ACCOUNT_DAY_QUOTA_ERROR.getCode(), ResponseCode.ACCOUNT_DAY_QUOTA_ERROR.getInfo());
                         }
-                    }else {
+                    } else {
                         // 插入用户活动账户日信息
                         raffleActivityAccountDayDao.insertActivityAccountDay(
                                 RaffleActivityAccountDay.builder()
@@ -390,7 +391,7 @@ public class ActivityRepository implements IActivityRepository {
                     );
 
                     return 1;
-                }catch (DuplicateKeyException  e){
+                } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
                     log.error("写入创建参与活动记录，唯一索引冲突 userId: {} activityId: {}", userId, activityId, e);
                     throw new AppException(ResponseCode.INDEX_DUP.getCode(), e);
@@ -460,5 +461,28 @@ public class ActivityRepository implements IActivityRepository {
                 .dayCount(raffleActivityAccountDayRes.getDayCount())
                 .dayCountSurplus(raffleActivityAccountDayRes.getDayCountSurplus())
                 .build();
+    }
+
+    @Override
+    public List<ActivitySkuEntity> queryActivitySkuByActivityId(Long activityId) {
+        RaffleActivitySku raffleActivitySkuReq = new RaffleActivitySku();
+        raffleActivitySkuReq.setActivityId(activityId);
+        List<RaffleActivitySku> raffleActivitySkuRes = raffleActivitySkuDao.queryActivitySkuByActivityId(raffleActivitySkuReq);
+        if (null == raffleActivitySkuRes || raffleActivitySkuRes.isEmpty()) {
+            return null;
+        }
+        // 将实体类转换为Entity对象
+        List<ActivitySkuEntity> activitySkuEntityList = raffleActivitySkuRes.stream()
+                .map(raffleActivitySku -> {
+                    return ActivitySkuEntity.builder()
+                            .sku(raffleActivitySku.getSku())
+                            .activityId(raffleActivitySku.getActivityId())
+                            .activityCountId(raffleActivitySku.getActivityCountId())
+                            .stockCount(raffleActivitySku.getStockCount())
+                            .stockCountSurplus(raffleActivitySku.getStockCountSurplus())
+                            .build();
+                })
+                .collect(Collectors.toList());
+        return activitySkuEntityList;
     }
 }

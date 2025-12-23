@@ -4,4 +4,6 @@ public interface IActivityArmory {
 
     // 活动装配接口
     boolean assembleActivitySku(Long sku);
+
+    Boolean assembleActivitySkuByActivityId(Long activityId);
 }

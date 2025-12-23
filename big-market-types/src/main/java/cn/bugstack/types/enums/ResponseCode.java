@@ -29,6 +29,7 @@ public enum ResponseCode {
     ACTIVITY_ORDER_ERROR("ERR_BIZ_009", "用户抽奖单已使用过，不可重复抽奖"),
     AWARD_CONFIG_ERROR("ERR_CONFIG_001", "award_config 配置不是一个范围值，如 1,100"),
     USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT("ERR_CREDIT_001", "用户积分账户额度不足"),
+    ACTIVITY_SKU_LIST_NOT_EXIST("ERR_BIZ_010", "活动SKU不存在"),
     ;
 
     private String code;

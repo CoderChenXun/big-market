@@ -1,6 +1,6 @@
 package cn.bugstack.trigger.http;
 
-import cn.bugstack.api.IRaffleService;
+import cn.bugstack.api.IRaffleStrategyService;
 import cn.bugstack.api.dto.RaffleAwardListRequestDTO;
 import cn.bugstack.api.dto.RaffleAwardListResponseDTO;
 import cn.bugstack.api.dto.RaffleRequestDTO;
@@ -24,8 +24,8 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @CrossOrigin("${app.config.cross-origin}")
-@RequestMapping("/api/${app.config.api-version}/raffle/")
-public class RaffleController implements IRaffleService {
+@RequestMapping("/api/${app.config.api-version}/raffle/strategy/")
+public class RaffleStrategyController implements IRaffleStrategyService {
     /**
      * 策略装配接口
      */

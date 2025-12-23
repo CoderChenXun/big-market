@@ -8,9 +8,10 @@ import cn.bugstack.api.response.Response;
 
 import java.util.List;
 
-public interface IRaffleService {
+public interface IRaffleStrategyService {
     /**
      * 策略装配接口
+     *
      * @param strategyId
      * @return
      */
@@ -29,4 +30,5 @@ public interface IRaffleService {
      * @return
      */
     Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO requestDTO);
+
 }

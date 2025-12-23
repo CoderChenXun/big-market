@@ -92,6 +92,13 @@ public class StrategyArmoryDispatch implements IStrategyArmory, IStrategyDispatc
         return true;
     }
 
+    @Override
+    public boolean strategyArmoryByActivityId(Long activityId) {
+        // 首先查询策略ID，然后根据策略ID进行装配
+        Long strategyId = repository.queryStrategyIdByActivityId(activityId);
+        return assembleLotteryStrategy(strategyId);
+    }
+
     private void cacheStrategyAwardCount(Long strategyId, Integer awardId, Integer awardCount) {
         log.info("缓存策略ID：{}，奖品ID：{}，奖品数量：{}", strategyId, awardId, awardCount);
         repository.cacheStrategyAwardCount(strategyId, awardId, awardCount);
