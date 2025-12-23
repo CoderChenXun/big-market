@@ -79,4 +79,10 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
         // 清空阻塞队列信息
         activityRepository.clearQueueValue();
     }
+
+    @Override
+    public Integer queryRaffleActivityAccountDayPartakeCount(String userId, Long activityId) {
+        // 活动域获取用户参与活动日抽奖次数
+        return activityRepository.queryActivityAccountDayPartakeCount(userId, activityId);
+    }
 }

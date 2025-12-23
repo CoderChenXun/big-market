@@ -9,6 +9,7 @@ import cn.bugstack.infrastructure.dao.*;
 import cn.bugstack.infrastructure.dao.po.*;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.types.common.Constants;
+import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBlockingQueue;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Resource;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import static cn.bugstack.types.enums.ResponseCode.UN_ASSEMBLED_STRATEGY_ARMORY;
 
@@ -83,6 +85,7 @@ public class StrategyRepository implements IStrategyRepository {
                     .awardTitle(strategyAward.getAwardTitle())
                     .awardSubtitle(strategyAward.getAwardSubtitle())
                     .sort(strategyAward.getSort())
+                    .ruleModels(strategyAward.getRuleModels())
                     .build();
             strategyAwardEntityList.add(strategyAwardEntity);
         }
@@ -249,7 +252,7 @@ public class StrategyRepository implements IStrategyRepository {
     }
 
     @Override
-    public Boolean subtractionAwardStock(String cachedKey) {
+    public Boolean subtractionAwardStock(String cachedKey,Date endDateTime) {
         // 1. 首先检查redis缓存是否有该key
         // 1.1 没有则返回false
         if (!redisService.isExists(cachedKey)) {
@@ -265,11 +268,22 @@ public class StrategyRepository implements IStrategyRepository {
 
         // 2. 锁住当前库存
         String lockedKey = cachedKey + Constants.UNDERLINE + surPlus;
-        Boolean setNx = redisService.setNx(lockedKey);
-        if (!setNx) {
+        boolean lock = false;
+        if(null != endDateTime){
+            long expired = endDateTime.getTime() - System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1);
+            lock = redisService.setNx(lockedKey, expired, TimeUnit.MILLISECONDS);
+        }else {
+            lock = redisService.setNx(lockedKey);
+        }
+        if (!lock) {
             log.info("策略奖品库存加锁失败 {}", lockedKey);
         }
-        return setNx;
+        return lock;
+    }
+
+    @Override
+    public Boolean subtractionAwardStock(String cachedKey) {
+        return subtractionAwardStock(cachedKey, null);
     }
 
     @Override
@@ -333,5 +347,36 @@ public class StrategyRepository implements IStrategyRepository {
         raffleActivityReq.setActivityId(activityId);
         RaffleActivity raffleActivityRes = raffleActivityDao.queryStrategyIdByActivityId(raffleActivityReq);
         return raffleActivityRes.getStrategyId();
+    }
+
+    @Override
+    public List<StrategyAwardEntity> queryStrategyAwardListByActivityId(Long activityId) {
+        // 1. 首先根据activityId查询出strategyId
+        RaffleActivity raffleActivityReq = new RaffleActivity();
+        raffleActivityReq.setActivityId(activityId);
+        RaffleActivity raffleActivity = raffleActivityDao.queryStrategyIdByActivityId(raffleActivityReq);
+        if (null == raffleActivity) {
+            // 说明当前活动未配置抽奖策略
+            throw new AppException(ResponseCode.ACTIVITY_NOT_STRATEGY_CONFIG.getCode(), ResponseCode.ACTIVITY_NOT_STRATEGY_CONFIG.getInfo());
+        }
+        Long strategyId = raffleActivity.getStrategyId();
+        List<StrategyAwardEntity> strategyAwardEntities = queryStrategyAwardListByStrategyId(strategyId);
+        return strategyAwardEntities;
+    }
+
+    @Override
+    public Map<String, Integer> queryAwardRuleLockCount(String[] treeIds) {
+        if(null == treeIds || treeIds.length <= 0){
+            return new HashMap<>();
+        }
+        List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryAwardRuleLockCount(treeIds);
+        // 将节点数据转换成Map
+        Map<String,Integer> ruleLockCountMap = new HashMap<>();
+        for (RuleTreeNode ruleTreeNode : ruleTreeNodes) {
+            String lockCount = ruleTreeNode.getRuleValue();
+            Integer lockCountInt = lockCount == null ? 0 : Integer.parseInt(lockCount);
+            ruleLockCountMap.put(ruleTreeNode.getTreeId(),lockCountInt);
+        }
+        return ruleLockCountMap;
     }
 }

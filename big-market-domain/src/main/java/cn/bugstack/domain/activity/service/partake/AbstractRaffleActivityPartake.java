@@ -47,6 +47,7 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
         }
 
         // 3. 查询是否有未使用过的抽奖单
+        // TODO 添加活动的结束时间
         UserRaffleOrderEntity oldUserRaffleOrderEntity = activityRepository.queryNoUsedRaffleOrder(partakeRaffleActivityEntity);
         if (null != oldUserRaffleOrderEntity) {
             log.info("创建参与活动订单 userId:{} activityId:{} userRaffleOrderEntity:{}", userId, activityId, JSON.toJSONString(oldUserRaffleOrderEntity));
@@ -57,6 +58,7 @@ public abstract class AbstractRaffleActivityPartake implements IRaffleActivityPa
         CreatePartakeOrderAggregate createPartakeOrderAggregate = this.doFilterAccount(userId, activityId, currentDate);
 
         // 5. 构造抽奖单
+        // TODO 添加活动的结束时间
         UserRaffleOrderEntity userRaffleOrderEntity = this.buildUserRaffleOrderEntity(userId, activityId, currentDate);
         createPartakeOrderAggregate.setUserRaffleOrderEntity(userRaffleOrderEntity);
 

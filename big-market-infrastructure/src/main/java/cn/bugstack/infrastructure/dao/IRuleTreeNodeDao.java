@@ -9,4 +9,6 @@ import java.util.List;
 public interface IRuleTreeNodeDao {
 
     List<RuleTreeNode> queryRuleTreeNodeByTreeId(String treeId);
+
+    List<RuleTreeNode> queryAwardRuleLockCount(String[] treeIds);
 }

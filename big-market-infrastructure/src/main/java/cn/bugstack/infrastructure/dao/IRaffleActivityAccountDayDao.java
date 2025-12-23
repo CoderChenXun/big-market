@@ -12,6 +12,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IRaffleActivityAccountDayDao {
     @DBRouter
+    RaffleActivityAccountDay queryActivityAccountDayPartakeCount(RaffleActivityAccountDay raffleActivityAccountDayReq);
+
+    @DBRouter
     RaffleActivityAccountDay queryActivityAccountDayByUserId(RaffleActivityAccountDay raffleActivityAccountDayReq);
 
     int updateActivityAccountDaySubtractionQuota(RaffleActivityAccountDay build);

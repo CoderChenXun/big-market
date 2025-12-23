@@ -36,13 +36,10 @@ public class StrategyAwardEntity {
      * 奖品中奖概率
      */
     private BigDecimal awardRate;
-
-
     /**
      * 抽奖奖品标题
      */
     private String awardTitle;
-
     /**
      * 抽奖奖品副标题
      */
@@ -51,4 +48,8 @@ public class StrategyAwardEntity {
      * 排序
      */
     private Integer sort;
+    /**
+     * 奖品规则模型
+     */
+    private String ruleModels;
 }

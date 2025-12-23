@@ -18,4 +18,14 @@
         FROM rule_tree_node
         WHERE tree_id = #{treeId}
     </select>
+
+<!--    List<RuleTreeNode> queryAwardRuleLockCount(String[] treeIds);-->
+    <select id="queryAwardRuleLockCount" resultMap="DataMap">
+        SELECT tree_id, rule_value
+        FROM rule_tree_node
+        WHERE rule_key = 'rule_lock' and tree_id IN
+        <foreach item="treeId" collection="treeIds" separator="," open="(" close=")">
+            #{treeId}
+        </foreach>
+    </select>
 </mapper>

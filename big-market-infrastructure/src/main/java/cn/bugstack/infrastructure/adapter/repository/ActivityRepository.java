@@ -265,6 +265,8 @@ public class ActivityRepository implements IActivityRepository {
         if (null == userRaffleOrder) {
             return null;
         }
+        // 查询活动的结束时间
+        ActivityEntity activity = queryRaffleActivityByActivityId(partakeRaffleActivityEntity.getActivityId());
 
         return UserRaffleOrderEntity.builder()
                 .userId(userRaffleOrder.getUserId())
@@ -274,6 +276,7 @@ public class ActivityRepository implements IActivityRepository {
                 .orderId(userRaffleOrder.getOrderId())
                 .orderTime(userRaffleOrder.getOrderTime())
                 .orderState(UserRaffleOrderStateVo.valueOf(userRaffleOrder.getOrderState().toUpperCase()))
+                .endDateTime(activity.getEndDateTime())
                 .build();
     }
 
@@ -484,5 +487,19 @@ public class ActivityRepository implements IActivityRepository {
                 })
                 .collect(Collectors.toList());
         return activitySkuEntityList;
+    }
+
+    @Override
+    public Integer queryActivityAccountDayPartakeCount(String userId, Long activityId) {
+        // 构建请求参数
+        RaffleActivityAccountDay raffleActivityAccountDayReq = new RaffleActivityAccountDay();
+        raffleActivityAccountDayReq.setUserId(userId);
+        raffleActivityAccountDayReq.setActivityId(activityId);
+        // 设计日期
+        raffleActivityAccountDayReq.setDay(raffleActivityAccountDayReq.currentDay());
+        // 注意分库分表
+        RaffleActivityAccountDay raffleActivityAccountDayRes = raffleActivityAccountDayDao.queryActivityAccountDayPartakeCount(raffleActivityAccountDayReq);
+        // 获取结果
+        return null == raffleActivityAccountDayRes ? 0 : raffleActivityAccountDayRes.getDayCount() - raffleActivityAccountDayRes.getDayCountSurplus();
     }
 }

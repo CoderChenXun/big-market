@@ -32,7 +32,7 @@ public class ActivitySkuStockZeroConsumer {
             // 更新ActivitySku表的库存信息
             skuStock.clearActivitySkuStock(sku);
             // 清空阻塞队列，此时不需要延迟更新数据库记录了
-            skuStock.clearQueueValue();
+            //            skuStock.clearQueueValue();
         }catch (Exception e) {
             log.error("监听活动sku库存消耗为0消息，消费失败 topic: {} message: {}", topic, message);
             throw e;

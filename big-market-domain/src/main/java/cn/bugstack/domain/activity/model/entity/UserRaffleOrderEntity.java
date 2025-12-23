@@ -41,4 +41,8 @@ public class UserRaffleOrderEntity {
      * 订单状态；create-创建、used-已使用、cancle-已作废
      */
     private UserRaffleOrderStateVo orderState;
+    /**
+     * 活动结束时间
+     */
+    private Date endDateTime;
 }

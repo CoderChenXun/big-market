@@ -35,4 +35,12 @@
         insert into raffle_activity_account_day(user_id, activity_id, day, day_count, day_count_surplus, create_time, update_time)
         values (#{userId}, #{activityId}, #{day}, #{dayCount}, #{dayCountSurplus}, now(), now())
     </insert>
+
+    <select id="queryActivityAccountDayPartakeCount" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityAccountDay" resultMap="dataMap">
+        select user_id, activity_id, day, day_count, day_count_surplus
+        from raffle_activity_account_day
+        where user_id = #{userId}
+          and activity_id = #{activityId}
+          and day = #{day}
+    </select>
 </mapper>

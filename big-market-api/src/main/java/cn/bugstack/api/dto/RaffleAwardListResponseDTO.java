@@ -29,4 +29,13 @@ public class RaffleAwardListResponseDTO {
      * 奖品顺序
      */
     private Integer sort;
+
+    // 奖品次数规则 -- 抽奖N次后解锁，未配置则为空
+    private Integer awardRuleLockCount;
+
+    // 奖品是否解锁
+    private Boolean isAwardUnlock;
+
+    // 等待解锁的次数
+    private Integer waitUnlockCount;
 }

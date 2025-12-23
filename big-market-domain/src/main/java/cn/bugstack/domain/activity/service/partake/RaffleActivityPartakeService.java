@@ -94,6 +94,7 @@ public class RaffleActivityPartakeService extends AbstractRaffleActivityPartake 
         // 设置活动信息
         userRaffleOrderEntity.setActivityName(activityEntity.getActivityName());
         userRaffleOrderEntity.setStrategyId(activityEntity.getStrategyId());
+        userRaffleOrderEntity.setEndDateTime(activityEntity.getEndDateTime());
         // 设置随机订单id
         userRaffleOrderEntity.setOrderId(RandomStringUtils.randomNumeric(12));
         userRaffleOrderEntity.setOrderState(UserRaffleOrderStateVo.CREATE);

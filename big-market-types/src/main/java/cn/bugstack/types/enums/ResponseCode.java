@@ -30,6 +30,7 @@ public enum ResponseCode {
     AWARD_CONFIG_ERROR("ERR_CONFIG_001", "award_config 配置不是一个范围值，如 1,100"),
     USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT("ERR_CREDIT_001", "用户积分账户额度不足"),
     ACTIVITY_SKU_LIST_NOT_EXIST("ERR_BIZ_010", "活动SKU不存在"),
+    ACTIVITY_NOT_STRATEGY_CONFIG("ERR_BIZ_011", "活动未配置抽奖策略"),
     ;
 
     private String code;
