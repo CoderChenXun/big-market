@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.bugstack.infrastructure.dao.IDailyBehaviorRebateDao">
+    <resultMap id="dataMap" type="cn.bugstack.infrastructure.dao.po.DailyBehaviorRebate">
+        <id column="id" property="id"/>
+        <id column="behavior_type" property="behaviorType"/>
+        <id column="rebate_desc" property="rebateDesc"/>
+        <id column="rebate_type" property="rebateType"/>
+        <id column="rebate_config" property="rebateConfig"/>
+        <id column="state" property="state"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!--    List<DailyBehaviorRebate> queryDailyBehaviorRebateByBehaviorType(DailyBehaviorRebate dailyBehaviorRebateReq);-->
+    <select id="queryDailyBehaviorRebateByBehaviorType"
+            parameterType="cn.bugstack.infrastructure.dao.po.DailyBehaviorRebate" resultMap="dataMap">
+        select behavior_type, rebate_desc, rebate_type, rebate_config
+        from daily_behavior_rebate
+        where state = 'open'
+    </select>
+</mapper>

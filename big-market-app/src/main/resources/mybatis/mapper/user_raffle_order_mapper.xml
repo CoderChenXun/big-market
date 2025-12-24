@@ -25,8 +25,20 @@
     </select>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.UserRaffleOrder">
-        insert into user_raffle_order (user_id, activity_id, activity_name, strategy_id, order_id, order_time, order_state, create_time, update_time)
-        values (#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{orderState}, now(), now())
+        insert into user_raffle_order (user_id, activity_id, activity_name, strategy_id, order_id, order_time,
+                                       order_state, create_time, update_time)
+        values (#{userId}, #{activityId}, #{activityName}, #{strategyId}, #{orderId}, #{orderTime}, #{orderState},
+                now(), now())
     </insert>
+
+    <!--    int updateUserRaffleOrder(UserRaffleOrder userRaffleOrderReq);-->
+    <update id="updateUserRaffleOrderStateUsed" parameterType="cn.bugstack.infrastructure.dao.po.UserRaffleOrder">
+        update user_raffle_order
+        set order_state = 'used',
+            update_time = now()
+        where user_id = #{userId}
+          and order_id = #{orderId}
+          and order_state = 'create'
+    </update>
 
 </mapper>

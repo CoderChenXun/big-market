@@ -6,8 +6,10 @@ import cn.bugstack.domain.award.model.entity.UserAwardRecordEntity;
 import cn.bugstack.domain.award.repository.IAwardRepository;
 import cn.bugstack.infrastructure.dao.ITaskDao;
 import cn.bugstack.infrastructure.dao.IUserAwardRecordDao;
+import cn.bugstack.infrastructure.dao.IUserRaffleOrderDao;
 import cn.bugstack.infrastructure.dao.po.Task;
 import cn.bugstack.infrastructure.dao.po.UserAwardRecord;
+import cn.bugstack.infrastructure.dao.po.UserRaffleOrder;
 import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.bugstack.types.enums.ResponseCode;
@@ -25,6 +27,9 @@ import javax.annotation.Resource;
 public class AwardRepository implements IAwardRepository {
     @Resource
     private IUserAwardRecordDao userAwardRecordDao;
+
+    @Resource
+    private IUserRaffleOrderDao userRaffleOrderDao;
 
     @Resource
     private ITaskDao taskDao;
@@ -63,6 +68,10 @@ public class AwardRepository implements IAwardRepository {
         task.setMessage(JSON.toJSONString(taskEntity.getMessage()));
         task.setState(taskEntity.getState().getCode());
 
+        UserRaffleOrder userRaffleOrderReq = new UserRaffleOrder();
+        userRaffleOrderReq.setUserId(userId);
+        userRaffleOrderReq.setOrderId(userAwardRecordEntity.getOrderId());
+
         // 注意分库分表
         try {
             dbRouter.doRouter(userId);
@@ -72,6 +81,13 @@ public class AwardRepository implements IAwardRepository {
                     userAwardRecordDao.insert(userAwardRecord);
                     // 写入任务
                     taskDao.insert(task);
+                    // 更新抽奖单
+                    int count = userRaffleOrderDao.updateUserRaffleOrderStateUsed(userRaffleOrderReq);
+                    if (1 != count) {
+                        status.setRollbackOnly();
+                        log.error("更新抽奖单失败 userId: {} activityId: {} awardId: {}", userId, activityId, awardId);
+                        throw new AppException(ResponseCode.ACTIVITY_ORDER_ERROR.getCode(), ResponseCode.ACTIVITY_ORDER_ERROR.getInfo());
+                    }
                     return 1;
                 }catch(DuplicateKeyException  e){
                     // 回滚
