@@ -2,6 +2,7 @@ package cn.bugstack.domain.strategy.service.raffle;
 
 import cn.bugstack.domain.strategy.model.entity.StrategyAwardEntity;
 import cn.bugstack.domain.strategy.model.valobj.RuleTreeVO;
+import cn.bugstack.domain.strategy.model.valobj.RuleWeightVO;
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardRuleModelVO;
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
@@ -86,5 +87,18 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
         // 根据treeId查询对应根决策节点rule_lock对应的解锁值
         Map<String, Integer> ruleLockCount = repository.queryAwardRuleLockCount(treeIds);
         return ruleLockCount;
+    }
+
+    @Override
+    public List<RuleWeightVO> queryRuleWeightByActivityId(Long activityId) {
+        // 1. 首先根据activityId查询出strategyId
+        Long strategyId = repository.queryStrategyIdByActivityId(activityId);
+        return queryRuleWeightByStrategyId(strategyId);
+    }
+
+    @Override
+    public List<RuleWeightVO> queryRuleWeightByStrategyId(Long StrategyId) {
+        // 根据策略Id 查询出规则权重
+        return repository.queryRuleWeightByStrategyId(StrategyId);
     }
 }

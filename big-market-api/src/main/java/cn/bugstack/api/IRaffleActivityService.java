@@ -1,9 +1,6 @@
 package cn.bugstack.api;
 
-import cn.bugstack.api.dto.ActivityDrawRequestDTO;
-import cn.bugstack.api.dto.ActivityDrawResponseDTO;
-import cn.bugstack.api.dto.RaffleAwardListRequestDTO;
-import cn.bugstack.api.dto.RaffleAwardListResponseDTO;
+import cn.bugstack.api.dto.*;
 import cn.bugstack.api.response.Response;
 
 import java.util.List;
@@ -27,4 +24,9 @@ public interface IRaffleActivityService {
     Response<ActivityDrawResponseDTO> draw(ActivityDrawRequestDTO request);
 
     Response<Boolean> calendarSignRebate(String userId);
+
+    Response<Boolean> isCalendarSignRebate(String userId);
+
+    Response<UserActivityAccountResponseDTO> queryUserActivityAccountEntity( UserActivityAccountRequestDTO request);
+
 }

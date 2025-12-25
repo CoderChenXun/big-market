@@ -23,6 +23,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,6 +85,8 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
                         userBehaviorRebateOrder.setRebateDesc(behaviorRebateOrderEntity.getRebateDesc());
                         userBehaviorRebateOrder.setRebateType(behaviorRebateOrderEntity.getRebateType());
                         userBehaviorRebateOrder.setRebateConfig(behaviorRebateOrderEntity.getRebateConfig());
+                        // 设置outBusinessNo
+                        userBehaviorRebateOrder.setOutBusinessNo(behaviorRebateOrderEntity.getOutBusinessNo());
                         userBehaviorRebateOrder.setBizId(behaviorRebateOrderEntity.getBizId());
                         // 保存用户返利记录
                         userBehaviorRebateOrderDao.insert(userBehaviorRebateOrder);
@@ -118,11 +121,40 @@ public class BehaviorRebateRepository implements IBehaviorRebateRepository {
             try {
                 // 发送MQ消息，在事务外执行，如果失败还有事务补偿机制
                 eventPublisher.publish(taskEntity.getTopic(), taskEntity.getMessage());
-                taskDao.updateTaskSendMessageCompleted( task);
-            }catch (Exception e){
+                taskDao.updateTaskSendMessageCompleted(task);
+            } catch (Exception e) {
                 log.error("写入返利记录 发送MQ消息失败 userId: {} topic: {}", taskEntity.getUserId(), taskEntity.getTopic());
                 taskDao.updateTaskSendMessageFail(task);
             }
         }
+    }
+
+    @Override
+    public List<BehaviorRebateOrderEntity> queryOrderByOutBusinessNo(String userId, String outBusinessNo) {
+        // 注意分库分表
+        UserBehaviorRebateOrder userBehaviorRebateOrderReq = new UserBehaviorRebateOrder();
+        userBehaviorRebateOrderReq.setUserId(userId);
+        userBehaviorRebateOrderReq.setOutBusinessNo(outBusinessNo);
+
+        List<UserBehaviorRebateOrder> userBehaviorRebateOrderList = userBehaviorRebateOrderDao.queryOrderByOutBusinessNo(userBehaviorRebateOrderReq);
+        if (null == userBehaviorRebateOrderList) {
+            return new ArrayList<>();
+        }
+        // 将实体类与Entity对象转换
+        List<BehaviorRebateOrderEntity> behaviorRebateOrderEntityList = userBehaviorRebateOrderList.stream()
+                .map(userBehaviorRebateOrder -> {
+                    return BehaviorRebateOrderEntity.builder()
+                            .userId(userBehaviorRebateOrder.getUserId())
+                            .orderId(userBehaviorRebateOrder.getOrderId())
+                            .behaviorType(userBehaviorRebateOrder.getBehaviorType())
+                            .rebateDesc(userBehaviorRebateOrder.getRebateDesc())
+                            .rebateType(userBehaviorRebateOrder.getRebateType())
+                            .rebateConfig(userBehaviorRebateOrder.getRebateConfig())
+                            .outBusinessNo(userBehaviorRebateOrder.getOutBusinessNo())
+                            .bizId(userBehaviorRebateOrder.getBizId())
+                            .build();
+                })
+                .collect(Collectors.toList());
+        return behaviorRebateOrderEntityList;
     }
 }

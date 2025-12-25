@@ -1,7 +1,6 @@
 package cn.bugstack.infrastructure.dao.po;
 
 import lombok.Data;
-
 import java.util.Date;
 
 @Data
@@ -40,6 +39,9 @@ public class UserBehaviorRebateOrder {
      * 返利配置【sku值，积分值】
      */
     private String rebateConfig;
+
+    // 添加外键业务Id
+    private String outBusinessNo;
 
     /**
      * 业务ID - 拼接的唯一值

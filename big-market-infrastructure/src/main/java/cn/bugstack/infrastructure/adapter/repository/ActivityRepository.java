@@ -522,4 +522,75 @@ public class ActivityRepository implements IActivityRepository {
         // 获取结果
         return null == raffleActivityAccountDayRes ? 0 : raffleActivityAccountDayRes.getDayCount() - raffleActivityAccountDayRes.getDayCountSurplus();
     }
+
+    @Override
+    public ActivityAccountEntity queryUserActivityAccountEntity(String userId, Long activityId) {
+        // 注意分库
+        ActivityAccountEntity activityAccountEntity = new ActivityAccountEntity();
+        // 查询用户活动总账户
+        RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
+        raffleActivityAccountReq.setUserId(userId);
+        raffleActivityAccountReq.setActivityId(activityId);
+        RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserIdAndActivityId(raffleActivityAccountReq);
+        // 如果活动总账户不存在
+        if (raffleActivityAccountRes == null) {
+            return ActivityAccountEntity.builder()
+                    .userId(userId)
+                    .activityId(activityId)
+                    .totalCount(0)
+                    .totalCountSurplus(0)
+                    .dayCount(0)
+                    .dayCountSurplus(0)
+                    .monthCount(0)
+                    .monthCountSurplus(0)
+                    .build();
+        }
+        activityAccountEntity.setUserId(raffleActivityAccountRes.getUserId());
+        activityAccountEntity.setActivityId(raffleActivityAccountRes.getActivityId());
+        activityAccountEntity.setTotalCount(raffleActivityAccountRes.getTotalCount());
+        activityAccountEntity.setTotalCountSurplus(raffleActivityAccountRes.getTotalCountSurplus());
+
+        // 查询用户活动账户日
+        RaffleActivityAccountDay raffleActivityAccountDayReq = new RaffleActivityAccountDay();
+        raffleActivityAccountDayReq.setUserId(userId);
+        raffleActivityAccountDayReq.setActivityId(activityId);
+        // TODO xfg未添加这个字段
+        raffleActivityAccountDayReq.setDay(raffleActivityAccountDayReq.currentDay());
+        RaffleActivityAccountDay raffleActivityAccountDayRes = raffleActivityAccountDayDao.queryActivityAccountDayByUserId(raffleActivityAccountDayReq);
+
+        // 查询用户活动账户月
+        RaffleActivityAccountMonth raffleActivityAccountMonthReq = new RaffleActivityAccountMonth();
+        raffleActivityAccountMonthReq.setUserId(userId);
+        raffleActivityAccountMonthReq.setActivityId(activityId);
+        // TODO xfg未添加这个字段
+        raffleActivityAccountMonthReq.setMonth(raffleActivityAccountMonthReq.currentMonth());
+        RaffleActivityAccountMonth raffleActivityAccountMonthRes = raffleActivityAccountMonthDao.queryActivityAccountMonthByUserId(raffleActivityAccountMonthReq);
+
+        if (null == raffleActivityAccountMonthRes) {
+            activityAccountEntity.setMonthCount(raffleActivityAccountRes.getMonthCount());
+            activityAccountEntity.setMonthCountSurplus(raffleActivityAccountRes.getMonthCountSurplus());
+        } else {
+            activityAccountEntity.setMonthCount(raffleActivityAccountMonthRes.getMonthCount());
+            activityAccountEntity.setMonthCountSurplus(raffleActivityAccountMonthRes.getMonthCountSurplus());
+        }
+
+        if (null == raffleActivityAccountDayRes) {
+            activityAccountEntity.setDayCount(raffleActivityAccountRes.getDayCount());
+            activityAccountEntity.setDayCountSurplus(raffleActivityAccountRes.getDayCountSurplus());
+        } else {
+            activityAccountEntity.setDayCount(raffleActivityAccountDayRes.getDayCount());
+            activityAccountEntity.setDayCountSurplus(raffleActivityAccountDayRes.getDayCountSurplus());
+        }
+        return activityAccountEntity;
+    }
+
+    @Override
+    public Integer queryActivityAccountTotalUseCount(String userId, Long activityId) {
+        // 注意分库
+        RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
+        raffleActivityAccountReq.setUserId(userId);
+        raffleActivityAccountReq.setActivityId(activityId);
+        RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserIdAndActivityId(raffleActivityAccountReq);
+        return null == raffleActivityAccountRes ? 0 : raffleActivityAccountRes.getTotalCount() - raffleActivityAccountRes.getTotalCountSurplus();
+    }
 }

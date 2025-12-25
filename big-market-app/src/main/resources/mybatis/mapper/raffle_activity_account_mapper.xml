@@ -52,11 +52,7 @@
         where user_id = #{userId}
           and activity_id = #{activityId}
     </select>
-<!--    int updateActivityAccountSubtractionQuota(RaffleActivityAccount build);-->
 
-<!--    void updateActivityAccountMonthSurplusImageQuota(RaffleActivityAccount build);-->
-
-<!--    void updateActivityAccountDaySurplusImageQuota(RaffleActivityAccount build);-->
     <update id="updateActivityAccountSubtractionQuota" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityAccount">
         update raffle_activity_account
         set total_count_surplus = total_count_surplus - 1,

@@ -69,4 +69,14 @@
         where strategy_id = #{strategyId}
           and award_id = #{awardId}
     </select>
+
+    <select id="queryStrategyAwardListByAwardIds" parameterType="java.util.List" resultMap="DataMap">
+        select award_id,
+               award_title
+        from strategy_award
+        where award_id in
+        <foreach item="item" collection="list" index="index" separator="," close=")" open="(">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

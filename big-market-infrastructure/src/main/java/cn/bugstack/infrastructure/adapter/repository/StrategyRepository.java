@@ -5,6 +5,8 @@ import cn.bugstack.domain.strategy.model.entity.StrategyEntity;
 import cn.bugstack.domain.strategy.model.entity.StrategyRuleEntity;
 import cn.bugstack.domain.strategy.model.valobj.*;
 import cn.bugstack.domain.strategy.repository.IStrategyRepository;
+import cn.bugstack.domain.strategy.service.rule.chain.factory.DefaultChainFactory;
+import cn.bugstack.domain.strategy.service.rule.chain.impl.DefaultLogicChain;
 import cn.bugstack.infrastructure.dao.*;
 import cn.bugstack.infrastructure.dao.po.*;
 import cn.bugstack.infrastructure.redis.IRedisService;
@@ -371,12 +373,60 @@ public class StrategyRepository implements IStrategyRepository {
         }
         List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryAwardRuleLockCount(treeIds);
         // 将节点数据转换成Map
-        Map<String,Integer> ruleLockCountMap = new HashMap<>();
+        Map<String, Integer> ruleLockCountMap = new HashMap<>();
         for (RuleTreeNode ruleTreeNode : ruleTreeNodes) {
             String lockCount = ruleTreeNode.getRuleValue();
             Integer lockCountInt = lockCount == null ? 0 : Integer.parseInt(lockCount);
-            ruleLockCountMap.put(ruleTreeNode.getTreeId(),lockCountInt);
+            ruleLockCountMap.put(ruleTreeNode.getTreeId(), lockCountInt);
         }
         return ruleLockCountMap;
+    }
+
+    @Override
+    public List<RuleWeightVO> queryRuleWeightByStrategyId(Long strategyId) {
+        // 1. 首先在strategy表中查询是否rule_weight策略规则
+        StrategyEntity strategyEntity = queryStrategyEntityByStrategyId(strategyId);
+        if (null == strategyEntity || null == strategyEntity.getRuleWeight()) {
+            // 当前策略不存在，或者策略规则不存在
+            return new ArrayList<>();
+        }
+        // 2. 如果有，则从strategy_rule查询对对应的rule_value
+        // 2.1 从缓存中读取
+        String cachedKey = Constants.RedisKey.STRATEGY_RULE_WEIGHT_KEY + strategyId;
+        List<RuleWeightVO> ruleWeightVOS = redisService.getValue(cachedKey);
+        if (null != ruleWeightVOS) {
+            return ruleWeightVOS;
+        }
+        // 2.2 从数据库中读取
+        String ruleValue = queryStrategyRuleValue(strategyId, null, DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
+        // 2.3 对rule_value进行处理
+        StrategyRuleEntity strategyRuleEntity = new StrategyRuleEntity();
+        strategyRuleEntity.setRuleModel(DefaultChainFactory.LogicModel.RULE_WEIGHT.getCode());
+        strategyRuleEntity.setRuleValue(ruleValue);
+        // key是4000:102,103,104,105，值是[102,103,104,105]
+        Map<String, List<Integer>> ruleWeightValues = strategyRuleEntity.getRuleWeightValues();
+        // 组装数据
+        ruleWeightVOS = new ArrayList<>();
+        Set<String> keySet = ruleWeightValues.keySet();
+        for (String key : keySet) {
+            List<Integer> awardIds = ruleWeightValues.get(key);
+            RuleWeightVO ruleWeightVO = new RuleWeightVO();
+            ruleWeightVO.setRuleValue(key);
+            ruleWeightVO.setWeight(Integer.valueOf(key.split(Constants.COLON)[0]));
+            ruleWeightVO.setAwardIds(awardIds);
+            // 查询奖品信息
+            List<StrategyAward> awards = strategyAwardDao.queryStrategyAwardListByAwardIds(awardIds);
+            List<RuleWeightVO.Award> awardList = awards.stream().map(award -> {
+                RuleWeightVO.Award ruleWeightAward = new RuleWeightVO.Award();
+                ruleWeightAward.setAwardId(award.getAwardId());
+                ruleWeightAward.setAwardTitle(award.getAwardTitle());
+                return ruleWeightAward;
+            }).collect(Collectors.toList());
+            ruleWeightVO.setAwardList(awardList);
+            ruleWeightVOS.add(ruleWeightVO);
+        }
+        // 缓存数据
+        redisService.setValue(cachedKey, ruleWeightVOS);
+        return ruleWeightVOS;
     }
 }

@@ -1,5 +1,6 @@
 package cn.bugstack.domain.activity.service;
 
+import cn.bugstack.domain.activity.model.entity.ActivityAccountEntity;
 import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
 
 public interface IRaffleActivityAccountQuotaService {
@@ -16,4 +17,8 @@ public interface IRaffleActivityAccountQuotaService {
     String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity);
 
     Integer queryRaffleActivityAccountDayPartakeCount(String userId, Long activityId);
+
+    ActivityAccountEntity queryUserActivityAccountEntity(String userId, Long activityId);
+
+    Integer queryUserActivityAccountTotalUseCount(String userId, Long activityId);
 }

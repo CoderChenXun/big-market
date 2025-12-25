@@ -1,9 +1,6 @@
 package cn.bugstack.api;
 
-import cn.bugstack.api.dto.RaffleAwardListRequestDTO;
-import cn.bugstack.api.dto.RaffleAwardListResponseDTO;
-import cn.bugstack.api.dto.RaffleRequestDTO;
-import cn.bugstack.api.dto.RaffleResponseDTO;
+import cn.bugstack.api.dto.*;
 import cn.bugstack.api.response.Response;
 
 import java.util.List;
@@ -26,9 +23,12 @@ public interface IRaffleStrategyService {
 
     /**
      * 抽奖
+     *
      * @param requestDTO
      * @return
      */
     Response<RaffleResponseDTO> randomRaffle(RaffleRequestDTO requestDTO);
 
+
+    Response<List<RaffleStrategyRuleWeightResponseDTO>> queryRaffleStrategyRuleWeight(RaffleStrategyRuleWeightRequestDTO request);
 }
