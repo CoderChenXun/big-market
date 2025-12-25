@@ -26,8 +26,5 @@ public interface IRaffleActivityService {
      */
     Response<ActivityDrawResponseDTO> draw(ActivityDrawRequestDTO request);
 
-    /**
-     * 查询奖品列表
-     */
-    Response<List<RaffleAwardListResponseDTO>> queryRaffleAwardList(RaffleAwardListRequestDTO request);
+    Response<Boolean> calendarSignRebate(String userId);
 }

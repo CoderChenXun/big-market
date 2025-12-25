@@ -5,12 +5,10 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum BehaviorTypeVO {
+public enum RebateTypeVO {
+    SKU("sku", "活动库存充值商品"),
+    INTEGRAL("integral", "积分充值商品");
 
-    SIGN("sign", "签到（日历）"),
-    OPENAI_PAY("openai_pay", "openai 外部支付完成"),
-    ;
     private final String code;
     private final String info;
-
 }

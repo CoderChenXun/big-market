@@ -26,13 +26,25 @@
         set month_count_surplus = month_count_surplus - 1,
             update_time = now()
         where user_id = #{userId}
-          and activity_id = #{activityId}
-          and month = #{month}
+                  and activity_id = #{activityId}
+                  and month = #{month}
           and month_count_surplus > 0
     </update>
 
-    <insert id="insertActivityAccountMonth" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityAccountMonth">
-        insert into raffle_activity_account_month(user_id, activity_id, month, month_count, month_count_surplus, create_time, update_time)
+    <insert id="insertActivityAccountMonth"
+            parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityAccountMonth">
+        insert into raffle_activity_account_month(user_id, activity_id, month, month_count, month_count_surplus,
+                                                  create_time, update_time)
         values (#{userId}, #{activityId}, #{month}, #{monthCount}, #{monthCountSurplus}, now(), now())
     </insert>
+
+    <update id="addAccountQuota" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityAccountMonth">
+        update raffle_activity_account_month
+        set month_count         = month_count + #{monthCount},
+            month_count_surplus = month_count_surplus + #{monthCountSurplus},
+            update_time         = now()
+        where user_id = #{userId}
+                  and activity_id = #{activityId}
+                  and month = #{month}
+    </update>
 </mapper>

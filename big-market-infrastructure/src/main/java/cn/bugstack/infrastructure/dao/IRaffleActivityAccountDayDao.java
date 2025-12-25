@@ -20,4 +20,6 @@ public interface IRaffleActivityAccountDayDao {
     int updateActivityAccountDaySubtractionQuota(RaffleActivityAccountDay build);
 
     void insertActivityAccountDay(RaffleActivityAccountDay build);
+
+    void addAccountQuota(RaffleActivityAccountDay raffleActivityAccountDay);
 }

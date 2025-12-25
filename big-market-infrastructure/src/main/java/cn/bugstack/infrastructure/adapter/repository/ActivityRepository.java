@@ -165,6 +165,22 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityAccount.setMonthCount(activityOrderEntity.getMonthCount());
             raffleActivityAccount.setMonthCountSurplus(activityOrderEntity.getMonthCount());
 
+            // 更新对象月账户信息
+            RaffleActivityAccountMonth raffleActivityAccountMonth = new RaffleActivityAccountMonth();
+            raffleActivityAccountMonth.setUserId(createOrderAggregate.getUserId());
+            raffleActivityAccountMonth.setActivityId(createOrderAggregate.getActivityId());
+            raffleActivityAccountMonth.setMonth(raffleActivityAccountMonth.getMonth());
+            raffleActivityAccountMonth.setMonthCount(activityOrderEntity.getMonthCount());
+            raffleActivityAccountMonth.setMonthCountSurplus(activityOrderEntity.getMonthCount());
+
+            // 更新对象日账户信息
+            RaffleActivityAccountDay raffleActivityAccountDay = new RaffleActivityAccountDay();
+            raffleActivityAccountDay.setUserId(createOrderAggregate.getUserId());
+            raffleActivityAccountDay.setActivityId(createOrderAggregate.getActivityId());
+            raffleActivityAccountDay.setDay(raffleActivityAccountDay.getDay());
+            raffleActivityAccountDay.setDayCount(activityOrderEntity.getDayCount());
+            raffleActivityAccountDay.setDayCountSurplus(activityOrderEntity.getDayCount());
+
             // 2. 在同一个领域内进行事务控制保证事实一致性，在不同领域内实现最终一致性
             // 以用户ID作为切分键，通过 doRouter 设定路由【这样就保证了下面的操作，都是同一个链接下，也就保证了事务的特性】
             dbRouter.doRouter(createOrderAggregate.getUserId());
@@ -179,6 +195,10 @@ public class ActivityRepository implements IActivityRepository {
                     if (count == 0) {
                         raffleActivityAccountDao.insert(raffleActivityAccount);
                     }
+                    // 更新账户信息-月
+                    raffleActivityAccountMonthDao.addAccountQuota(raffleActivityAccountMonth);
+                    // 6. 更新账户信息-日
+                    raffleActivityAccountDayDao.addAccountQuota(raffleActivityAccountDay);
                     return 1;
                 } catch (DuplicateKeyException e) {
                     status.setRollbackOnly();
