@@ -214,7 +214,7 @@ public class RaffleActivityController implements IRaffleActivityService {
         }
     }
 
-    @RequestMapping(value = "query_user_activity_account_entity", method = RequestMethod.POST)
+    @RequestMapping(value = "query_user_activity_account", method = RequestMethod.POST)
     @Override
     public Response<UserActivityAccountResponseDTO> queryUserActivityAccountEntity(@RequestBody UserActivityAccountRequestDTO request) {
         try {

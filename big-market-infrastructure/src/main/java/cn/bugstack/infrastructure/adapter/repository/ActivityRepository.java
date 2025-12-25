@@ -169,7 +169,7 @@ public class ActivityRepository implements IActivityRepository {
             RaffleActivityAccountMonth raffleActivityAccountMonth = new RaffleActivityAccountMonth();
             raffleActivityAccountMonth.setUserId(createOrderAggregate.getUserId());
             raffleActivityAccountMonth.setActivityId(createOrderAggregate.getActivityId());
-            raffleActivityAccountMonth.setMonth(raffleActivityAccountMonth.getMonth());
+            raffleActivityAccountMonth.setMonth(RaffleActivityAccountMonth.currentMonth());
             raffleActivityAccountMonth.setMonthCount(activityOrderEntity.getMonthCount());
             raffleActivityAccountMonth.setMonthCountSurplus(activityOrderEntity.getMonthCount());
 
@@ -177,7 +177,7 @@ public class ActivityRepository implements IActivityRepository {
             RaffleActivityAccountDay raffleActivityAccountDay = new RaffleActivityAccountDay();
             raffleActivityAccountDay.setUserId(createOrderAggregate.getUserId());
             raffleActivityAccountDay.setActivityId(createOrderAggregate.getActivityId());
-            raffleActivityAccountDay.setDay(raffleActivityAccountDay.getDay());
+            raffleActivityAccountDay.setDay(RaffleActivityAccountDay.currentDay());
             raffleActivityAccountDay.setDayCount(activityOrderEntity.getDayCount());
             raffleActivityAccountDay.setDayCountSurplus(activityOrderEntity.getDayCount());
 
@@ -509,19 +509,6 @@ public class ActivityRepository implements IActivityRepository {
         return activitySkuEntityList;
     }
 
-    @Override
-    public Integer queryActivityAccountDayPartakeCount(String userId, Long activityId) {
-        // 构建请求参数
-        RaffleActivityAccountDay raffleActivityAccountDayReq = new RaffleActivityAccountDay();
-        raffleActivityAccountDayReq.setUserId(userId);
-        raffleActivityAccountDayReq.setActivityId(activityId);
-        // 设计日期
-        raffleActivityAccountDayReq.setDay(raffleActivityAccountDayReq.currentDay());
-        // 注意分库分表
-        RaffleActivityAccountDay raffleActivityAccountDayRes = raffleActivityAccountDayDao.queryActivityAccountDayPartakeCount(raffleActivityAccountDayReq);
-        // 获取结果
-        return null == raffleActivityAccountDayRes ? 0 : raffleActivityAccountDayRes.getDayCount() - raffleActivityAccountDayRes.getDayCountSurplus();
-    }
 
     @Override
     public ActivityAccountEntity queryUserActivityAccountEntity(String userId, Long activityId) {
@@ -555,7 +542,7 @@ public class ActivityRepository implements IActivityRepository {
         raffleActivityAccountDayReq.setUserId(userId);
         raffleActivityAccountDayReq.setActivityId(activityId);
         // TODO xfg未添加这个字段
-        raffleActivityAccountDayReq.setDay(raffleActivityAccountDayReq.currentDay());
+        raffleActivityAccountDayReq.setDay(RaffleActivityAccountDay.currentDay());
         RaffleActivityAccountDay raffleActivityAccountDayRes = raffleActivityAccountDayDao.queryActivityAccountDayByUserId(raffleActivityAccountDayReq);
 
         // 查询用户活动账户月
@@ -563,7 +550,7 @@ public class ActivityRepository implements IActivityRepository {
         raffleActivityAccountMonthReq.setUserId(userId);
         raffleActivityAccountMonthReq.setActivityId(activityId);
         // TODO xfg未添加这个字段
-        raffleActivityAccountMonthReq.setMonth(raffleActivityAccountMonthReq.currentMonth());
+        raffleActivityAccountMonthReq.setMonth(RaffleActivityAccountMonth.currentMonth());
         RaffleActivityAccountMonth raffleActivityAccountMonthRes = raffleActivityAccountMonthDao.queryActivityAccountMonthByUserId(raffleActivityAccountMonthReq);
 
         if (null == raffleActivityAccountMonthRes) {
@@ -586,6 +573,16 @@ public class ActivityRepository implements IActivityRepository {
 
     @Override
     public Integer queryActivityAccountTotalUseCount(String userId, Long activityId) {
+        // 注意分库
+        RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
+        raffleActivityAccountReq.setUserId(userId);
+        raffleActivityAccountReq.setActivityId(activityId);
+        RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserIdAndActivityId(raffleActivityAccountReq);
+        return null == raffleActivityAccountRes ? 0 : raffleActivityAccountRes.getTotalCount() - raffleActivityAccountRes.getTotalCountSurplus();
+    }
+
+    @Override
+    public Integer queryActivityAccountPartakeCount(String userId, Long activityId) {
         // 注意分库
         RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
         raffleActivityAccountReq.setUserId(userId);

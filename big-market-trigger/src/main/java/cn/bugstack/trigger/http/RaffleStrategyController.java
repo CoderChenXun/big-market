@@ -90,7 +90,7 @@ public class RaffleStrategyController implements IRaffleStrategyService {
             // 4. 查询规则配置
             Map<String, Integer> ruleLockCountMap = raffleRule.queryAwardRuleLockCount(valueModels);
             // 5. 查询当前用户的抽奖次数
-            Integer dayPartakeCount = raffleActivityAccountQuotaService.queryRaffleActivityAccountDayPartakeCount(requestDTO.getUserId(), requestDTO.getActivityId());
+            Integer dayPartakeCount = raffleActivityAccountQuotaService.queryRaffleActivityAccountPartakeCount(requestDTO.getUserId(), requestDTO.getActivityId());
             // 构建结果
             List<RaffleAwardListResponseDTO> raffleAwardListResponseDTOs = new ArrayList<>(strategyAwardList.size());
             for (StrategyAwardEntity strategyAwardEntity : strategyAwardList) {
