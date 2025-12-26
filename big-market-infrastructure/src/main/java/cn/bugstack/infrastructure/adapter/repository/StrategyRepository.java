@@ -53,6 +53,12 @@ public class StrategyRepository implements IStrategyRepository {
     @Resource
     private IRaffleActivityDao raffleActivityDao;
 
+    @Resource
+    private IRaffleActivityAccountDao raffleActivityAccountDao;
+
+    @Resource
+    private IRaffleActivityAccountDayDao raffleActivityAccountDayDao;
+
     /**
      * 通过策略id查询策略奖品
      *
@@ -428,5 +434,29 @@ public class StrategyRepository implements IStrategyRepository {
         // 缓存数据
         redisService.setValue(cachedKey, ruleWeightVOS);
         return ruleWeightVOS;
+    }
+
+    @Override
+    public Integer queryTodayUserRaffleCount(String userId, Long strategyId) {
+        // 1. 根据策略ID查询出活动ID
+        Long activityId = raffleActivityDao.queryActivityIdByStrategyId(strategyId);
+        // 2. 根据活动ID查询出用户今天抽奖次数
+        RaffleActivityAccountDay raffleActivityAccountDayReq = new RaffleActivityAccountDay();
+        raffleActivityAccountDayReq.setActivityId(activityId);
+        raffleActivityAccountDayReq.setUserId(userId);
+        raffleActivityAccountDayReq.setDay(RaffleActivityAccountDay.currentDay());
+        RaffleActivityAccountDay raffleActivityAccountDayRes = raffleActivityAccountDayDao.queryActivityAccountDayPartakeCount(raffleActivityAccountDayReq);
+        return raffleActivityAccountDayRes == null ? 0 : raffleActivityAccountDayRes.getDayCount() - raffleActivityAccountDayRes.getDayCountSurplus();
+    }
+
+    @Override
+    public Integer queryUserRaffleCount(String userId, Long strategyId) {
+        // 1. 根据策略ID查询出活动ID
+        Long activityId = raffleActivityDao.queryActivityIdByStrategyId(strategyId);
+        RaffleActivityAccount raffleActivityAccountReq = new RaffleActivityAccount();
+        raffleActivityAccountReq.setActivityId(activityId);
+        raffleActivityAccountReq.setUserId(userId);
+        RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserIdAndActivityId(raffleActivityAccountReq);
+        return raffleActivityAccountRes == null ? 0 : raffleActivityAccountRes.getTotalCount() - raffleActivityAccountRes.getTotalCountSurplus();
     }
 }

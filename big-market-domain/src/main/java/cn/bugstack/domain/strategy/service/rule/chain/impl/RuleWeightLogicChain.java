@@ -17,7 +17,6 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
 
     private IStrategyDispatch strategyDispatch;
 
-    private Long userRaffleCount = 4500L;
 
     public RuleWeightLogicChain(IStrategyRepository repository, IStrategyDispatch strategyDispatch) {
         this.repository = repository;
@@ -26,10 +25,17 @@ public class RuleWeightLogicChain extends AbstractLogicChain {
 
     @Override
     public DefaultChainFactory.StrategyAwardVO logic(String userId, Long strategyId) {
+        log.info("抽奖责任链-权重开始 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
         // 1. 查询value_weight规则在Strategy_rule表中对应的rule_value
         String ruleWeightValue = repository.queryStrategyRuleValue(strategyId, ruleModel());
 
         Map<Long, String> ruleWeightMap = getAnalyticalValue(ruleWeightValue);
+        if(null == ruleWeightMap || ruleWeightMap.isEmpty()){
+            log.warn("抽奖责任链-权重告警【策略配置权重，但ruleValue未配置相应值】 userId: {} strategyId: {} ruleModel: {}", userId, strategyId, ruleModel());
+            return next().logic(userId, strategyId);
+        }
+        // 2. 获取用户抽奖次数
+        Integer userRaffleCount = repository.queryUserRaffleCount(userId, strategyId);
         ArrayList<Long> ruleWeightValueList = new ArrayList<>(ruleWeightMap.keySet());
         // 对ruleWeightValueSet进行排序
         Collections.sort(ruleWeightValueList);

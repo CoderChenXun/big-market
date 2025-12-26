@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix-feat: 修复后端工程--营销服务 第24节：规则完善和应用接口实现">
+    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix-feat: 修改了workspace.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/repository/IStrategyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/repository/IStrategyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/RuleWeightLogicChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/RuleWeightLogicChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLockLogicTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLockLogicTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLuckAwardLogicTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLuckAwardLogicTreeNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/StrategyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/StrategyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="251225-coderlan-account-rule-sign-api" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -96,7 +103,7 @@
       <recent name="cn.bugstack.domain.rebate.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
+  <component name="RunManager" selected="JUnit.RaffleActivityControllerTest.test_calendarSignRebate">
     <configuration name="BehaviorRebateServiceTest.test_createOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -186,10 +193,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RaffleActivityControllerTest.test_calendarSignRebate" />
         <item itemvalue="JUnit.RaffleStrategyControllerTest.test_queryRaffleStrategyRuleWeight" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_queryUserActivityAccount" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_isCalendarSignRebate" />
-        <item itemvalue="JUnit.RaffleActivityControllerTest.test_calendarSignRebate" />
         <item itemvalue="JUnit.BehaviorRebateServiceTest.test_createOrder" />
       </list>
     </recent_temporary>
@@ -206,7 +213,7 @@
       <workItem from="1765192688175" duration="7054000" />
       <workItem from="1766024158762" duration="2117000" />
       <workItem from="1766538857568" duration="12701000" />
-      <workItem from="1766712868060" duration="1684000" />
+      <workItem from="1766712868060" duration="3846000" />
     </task>
     <task id="LOCAL-00001" summary="feat: init project">
       <created>1765181190018</created>
@@ -306,7 +313,14 @@
       <option name="project" value="LOCAL" />
       <updated>1766664825316</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fix-feat: 修改了workspace.xml">
+      <created>1766733189516</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1766733189516</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -362,11 +376,11 @@
     <MESSAGE value="feat: 将activity领域改造成armory、quota和partake三个子领域" />
     <MESSAGE value="fix-feat: 写入中奖记录和任务补偿发送MQ" />
     <MESSAGE value="feat: 写入中奖记录和任务补偿发送MQ" />
-    <MESSAGE value="fix-feat: 修改了workspace.xml" />
     <MESSAGE value="feat: 第21节：活动信息API迭代和功能完善" />
     <MESSAGE value="feat: 第23节：用户行为返利结算" />
     <MESSAGE value="fix-feat: 修复后端工程--营销服务 第24节：规则完善和应用接口实现" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix-feat: 修复后端工程--营销服务 第24节：规则完善和应用接口实现" />
+    <MESSAGE value="fix-feat: 修改了workspace.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix-feat: 修改了workspace.xml" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

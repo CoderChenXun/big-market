@@ -34,5 +34,10 @@
         where activity_id = #{activityId}
     </select>
 
-
+<!--    Long queryActivityIdByStrategyId(Long strategyId);-->
+    <select id="queryActivityIdByStrategyId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select activity_id
+        from raffle_activity
+        where strategy_id = #{strategyId} and state = 'open'
+    </select>
 </mapper>
