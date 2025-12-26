@@ -4,15 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix-feat: 修改了workspace.xml">
+    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix: 修复了在责任链rule_weight中查询用户抽奖总次数、规则树rule_lock查询用户当日抽奖次数和rule_luck_award抽出兜底奖品进行趋势更新库存等问题">
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_credit_account_mapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/aggregate/GiveOutPrizesAggregate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/entity/DistributeAwardEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/entity/UserCreditAwardEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/valobj/AccountStatusVO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/distribute/IDistributeAward.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/distribute/impl/UserCreditRandomAward.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IUserCreditAccountDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/po/UserCreditAccount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/raffle_activity_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/repository/IStrategyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/repository/IStrategyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/RuleWeightLogicChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/RuleWeightLogicChain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLockLogicTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLockLogicTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLuckAwardLogicTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/tree/impl/RuleLuckAwardLogicTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/StrategyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/StrategyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IRaffleActivityDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/award_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/award_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_award_record_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_award_record_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/event/SendAwardMessageEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/event/SendAwardMessageEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/entity/UserAwardRecordEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/model/entity/UserAwardRecordEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/repository/IAwardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/repository/IAwardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/AwardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/AwardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/IAwardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/award/service/IAwardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/AbstractRaffleStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/AbstractRaffleStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/factory/DefaultChainFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/factory/DefaultChainFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/BlackListLogicChain.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/strategy/service/rule/chain/impl/BlackListLogicChain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/AwardRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/AwardRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IAwardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IAwardDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IUserAwardRecordDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/dao/IUserAwardRecordDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/listener/SendAwardConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/listener/SendAwardConsumer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,23 +121,7 @@
       <recent name="cn.bugstack.domain.rebate.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RaffleActivityControllerTest.test_calendarSignRebate">
-    <configuration name="BehaviorRebateServiceTest.test_createOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="big-market-app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.BehaviorRebateServiceTest" />
-      <option name="METHOD_NAME" value="test_createOrder" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.RaffleActivityControllerTest.test_draw">
     <configuration name="RaffleActivityControllerTest.test_calendarSignRebate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -131,6 +133,22 @@
       <option name="PACKAGE_NAME" value="cn.bugstack.test.trigger" />
       <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.trigger.RaffleActivityControllerTest" />
       <option name="METHOD_NAME" value="test_calendarSignRebate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RaffleActivityControllerTest.test_draw" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="big-market-app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.bugstack.test.trigger.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.trigger" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.trigger.RaffleActivityControllerTest" />
+      <option name="METHOD_NAME" value="test_draw" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -193,11 +211,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RaffleActivityControllerTest.test_draw" />
+        <item itemvalue="JUnit.RaffleActivityControllerTest.test_queryUserActivityAccount" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_calendarSignRebate" />
         <item itemvalue="JUnit.RaffleStrategyControllerTest.test_queryRaffleStrategyRuleWeight" />
-        <item itemvalue="JUnit.RaffleActivityControllerTest.test_queryUserActivityAccount" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_isCalendarSignRebate" />
-        <item itemvalue="JUnit.BehaviorRebateServiceTest.test_createOrder" />
       </list>
     </recent_temporary>
   </component>
@@ -213,7 +231,7 @@
       <workItem from="1765192688175" duration="7054000" />
       <workItem from="1766024158762" duration="2117000" />
       <workItem from="1766538857568" duration="12701000" />
-      <workItem from="1766712868060" duration="3846000" />
+      <workItem from="1766712868060" duration="10539000" />
     </task>
     <task id="LOCAL-00001" summary="feat: init project">
       <created>1765181190018</created>
@@ -320,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1766733189516</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix: 修复了在责任链rule_weight中查询用户抽奖总次数、规则树rule_lock查询用户当日抽奖次数和rule_luck_award抽出兜底奖品进行趋势更新库存等问题">
+      <created>1766735629930</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1766735629930</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -337,7 +362,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="251226-coderlan-user-credit-account" />
                       </list>
                     </value>
                   </entry>
@@ -380,7 +405,8 @@
     <MESSAGE value="feat: 第23节：用户行为返利结算" />
     <MESSAGE value="fix-feat: 修复后端工程--营销服务 第24节：规则完善和应用接口实现" />
     <MESSAGE value="fix-feat: 修改了workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix-feat: 修改了workspace.xml" />
+    <MESSAGE value="fix: 修复了在责任链rule_weight中查询用户抽奖总次数、规则树rule_lock查询用户当日抽奖次数和rule_luck_award抽出兜底奖品进行趋势更新库存等问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: 修复了在责任链rule_weight中查询用户抽奖总次数、规则树rule_lock查询用户当日抽奖次数和rule_luck_award抽出兜底奖品进行趋势更新库存等问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

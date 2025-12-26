@@ -118,6 +118,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .awardTitle(raffleAwardEntity.getAwardTitle())
                     .awardState(AwardStateVO.create)
                     .awardTime(new Date())
+                    .awardConfig(raffleAwardEntity.getAwardConfig())
                     .build();
             awardService.saveUserAwardRecord(userAwardRecordEntity);
             // 返回结果

@@ -13,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
 @DBRouterStrategy(splitTable = true)
 public interface IUserAwardRecordDao {
     void insert(UserAwardRecord userAwardRecord);
+
+    Integer updateAwardRecordCompletedState(UserAwardRecord userAwardRecord);
 }

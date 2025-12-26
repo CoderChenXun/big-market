@@ -49,7 +49,7 @@ public abstract class AbstractRaffleStrategy implements IRaffleStrategy {
         // 2.1 如果是被黑名单拦截掉了，则直接返回
         log.info("抽奖策略计算-责任链 {} {} {} {}", userId, strategyId, chainStrategyAwardVO.getAwardId(), chainStrategyAwardVO.getLogicModel());
         if (!DefaultChainFactory.LogicModel.RULE_DEFAULT.getCode().equals(chainStrategyAwardVO.getLogicModel())) {
-            return buildRaffleAwardEntity(strategyId, chainStrategyAwardVO.getAwardId(), null);
+            return buildRaffleAwardEntity(strategyId, chainStrategyAwardVO.getAwardId(), chainStrategyAwardVO.getAwardRuleValue());
         }
         // 3. 责任树抽奖计算
         DefaultTreeFactory.StrategyAwardVO treeStrategyAwardVO = raffleLogicTree(userId, strategyId, chainStrategyAwardVO.getAwardId(),raffleFactorEntity.getEndDateTime());
