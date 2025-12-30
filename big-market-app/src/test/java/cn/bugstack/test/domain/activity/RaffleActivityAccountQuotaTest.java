@@ -1,9 +1,11 @@
 package cn.bugstack.test.domain.activity;
 
 import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
+import cn.bugstack.domain.activity.model.entity.UnpaidActivityOrderEntity;
 import cn.bugstack.domain.activity.model.valobj.OrderTradeTypeVO;
 import cn.bugstack.domain.activity.service.IRaffleActivityAccountQuotaService;
 import cn.bugstack.domain.activity.service.armory.IActivityArmory;
+import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,8 +37,8 @@ public class RaffleActivityAccountQuotaTest {
         skuRechargeEntity.setUserId("xiaofuge");
         skuRechargeEntity.setSku(9011L);
         skuRechargeEntity.setOutBusinessNo("700091009113");
-        String activityId = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
-        log.info("测试结果：{}", activityId);
+        UnpaidActivityOrderEntity unpaidActivityOrderEntity = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
+        log.info("测试结果：{}", JSON.toJSONString(unpaidActivityOrderEntity));
     }
 
     @Test
@@ -48,7 +50,7 @@ public class RaffleActivityAccountQuotaTest {
         skuRechargeEntity.setOutBusinessNo("251230009113");
         // 积分支付
         skuRechargeEntity.setTradeType(OrderTradeTypeVO.credit_pay_trade);
-        String activityId = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
-        log.info("测试结果：{}", activityId);
+        UnpaidActivityOrderEntity unpaidActivityOrderEntity = raffleActivityAccountQuotaService.createSkuRechargeOrder(skuRechargeEntity);
+        log.info("测试结果：{}", JSON.toJSONString(unpaidActivityOrderEntity));
     }
 }

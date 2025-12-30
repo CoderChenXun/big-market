@@ -1,9 +1,11 @@
 package cn.bugstack.test.infrastructure;
 
 import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
+import cn.bugstack.domain.activity.model.entity.UnpaidActivityOrderEntity;
 import cn.bugstack.domain.activity.service.quota.RaffleActivityAccountQuotaService;
 import cn.bugstack.domain.activity.service.armory.IActivityArmory;
 import cn.bugstack.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
@@ -41,8 +43,8 @@ public class RaffleActivityServiceTest {
                 skuRechargeEntity.setUserId("xiaofuge");
                 skuRechargeEntity.setSku(9011L);
                 skuRechargeEntity.setOutBusinessNo(RandomStringUtils.randomNumeric(12));
-                String orderId = raffleActivityService.createSkuRechargeOrder(skuRechargeEntity);
-                log.info("测试结果：{}", orderId);
+                UnpaidActivityOrderEntity unpaidActivityOrderEntity = raffleActivityService.createSkuRechargeOrder(skuRechargeEntity);
+                log.info("测试结果：{}", JSON.toJSONString(unpaidActivityOrderEntity));
             }
         }catch (AppException e){
             log.warn("测试异常：{}", e.getInfo());

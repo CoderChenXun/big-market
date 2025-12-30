@@ -1,5 +1,6 @@
 package cn.bugstack.domain.credit.service;
 
+import cn.bugstack.domain.credit.model.entity.CreditAccountEntity;
 import cn.bugstack.domain.credit.model.entity.TradeEntity;
 
 import java.math.BigDecimal;
@@ -17,4 +18,6 @@ public interface ICreditAdjustService {
      * @return 单号
      */
     String createOrder(TradeEntity tradeEntity);
+
+    CreditAccountEntity queryUserCreditAccount(String userId);
 }

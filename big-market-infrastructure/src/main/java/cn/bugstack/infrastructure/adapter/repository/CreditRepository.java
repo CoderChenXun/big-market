@@ -135,4 +135,23 @@ public class CreditRepository implements ICreditRepository {
             }
         }
     }
+
+    @Override
+    public CreditAccountEntity queryUserCreditAccount(String userId) {
+        // 1. 构建请求对象
+        UserCreditAccount userCreditAccountReq = new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        // 注意分库分表
+        try {
+            dbRouter.doRouter(userId);
+            UserCreditAccount userCreditAccountRes = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+            // 2. 构建响应对象
+            CreditAccountEntity creditAccountEntity = new CreditAccountEntity();
+            creditAccountEntity.setUserId(userCreditAccountRes.getUserId());
+            creditAccountEntity.setAdjustAmount(userCreditAccountRes.getAvailableAmount());
+            return creditAccountEntity;
+        }finally {
+            dbRouter.clear();
+        }
+    }
 }

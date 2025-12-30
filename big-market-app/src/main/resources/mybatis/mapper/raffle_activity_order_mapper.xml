@@ -73,4 +73,13 @@
           and out_business_no = #{outBusinessNo}
           and state = 'wait_pay'
     </update>
+
+    <select id="queryUnpaidActivityOrder" parameterType="cn.bugstack.infrastructure.dao.po.RaffleActivityOrder" resultMap="dataMap">
+        select user_id,
+               order_id,
+               pay_amount,
+               out_business_no
+        from raffle_activity_order
+        where user_id = #{userId} and sku = #{sku} and state = 'wait_pay' and order_time >= NOW() - INTERVAL 1 MONTH
+    </select>
 </mapper>

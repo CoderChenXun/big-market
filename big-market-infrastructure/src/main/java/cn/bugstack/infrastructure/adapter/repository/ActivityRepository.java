@@ -3,6 +3,7 @@ package cn.bugstack.infrastructure.adapter.repository;
 import cn.bugstack.domain.activity.event.ActivitySkuStockZeroMessageEvent;
 import cn.bugstack.domain.activity.model.aggregate.CreatePartakeOrderAggregate;
 import cn.bugstack.domain.activity.model.entity.*;
+import cn.bugstack.domain.activity.model.valobj.OrderTradeTypeVO;
 import cn.bugstack.domain.activity.model.valobj.UserRaffleOrderStateVo;
 import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
@@ -726,5 +727,61 @@ public class ActivityRepository implements IActivityRepository {
         } finally {
             lock.unlock();
         }
+    }
+
+    @Override
+    public UnpaidActivityOrderEntity queryUnpaidActivityOrder(SkuRechargeEntity skuRechargeEntity) {
+        String userId = skuRechargeEntity.getUserId();
+        Long sku = skuRechargeEntity.getSku();
+        // 组装查询条件
+        RaffleActivityOrder raffleActivityOrderReq = new RaffleActivityOrder();
+        raffleActivityOrderReq.setUserId(userId);
+        raffleActivityOrderReq.setSku(sku);
+        // 查询
+        RaffleActivityOrder raffleActivityOrderRes = raffleActivityOrderDao.queryUnpaidActivityOrder(raffleActivityOrderReq);
+        if(null == raffleActivityOrderRes){
+            return null;
+        }
+        // 组装返回结果
+        UnpaidActivityOrderEntity unpaidActivityOrderEntity = UnpaidActivityOrderEntity.builder()
+                .userId(raffleActivityOrderRes.getUserId())
+                .orderId(raffleActivityOrderRes.getOrderId())
+                .outBusinessNo(raffleActivityOrderRes.getOutBusinessNo())
+                .payAmount(raffleActivityOrderRes.getPayAmount())
+                .build();
+        return unpaidActivityOrderEntity;
+    }
+
+    @Override
+    public List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId) {
+        // 查询sku信息和activityCount信息进行组装
+        // 1. 查询sku信息
+        RaffleActivitySku raffleActivitySkuReq = new RaffleActivitySku();
+        raffleActivitySkuReq.setActivityId(activityId);
+        List<RaffleActivitySku> raffleActivitySkuList = raffleActivitySkuDao.queryActivitySkuByActivityId(raffleActivitySkuReq);
+        if (null == raffleActivitySkuList) {
+            return null;
+        }
+        List<SkuProductEntity> skuProductEntityList = raffleActivitySkuList.stream().map(raffleActivitySku -> {
+            return SkuProductEntity.builder()
+                    .sku(raffleActivitySku.getSku())
+                    .activityId(raffleActivitySku.getActivityId())
+                    .activityCountId(raffleActivitySku.getActivityCountId())
+                    .stockCount(raffleActivitySku.getStockCount())
+                    .stockCountSurplus(raffleActivitySku.getStockCountSurplus())
+                    .payAmount(raffleActivitySku.getProductAmount())
+                    .build();
+        }).collect(Collectors.toList());
+        // 2. 联合查询activityCount信息
+        for(SkuProductEntity skuProductEntity : skuProductEntityList){
+            RaffleActivityCount raffleActivityCountRes = raffleActivityCountDao.queryRaffleActivityCountByActivityCountId(skuProductEntity.getActivityCountId());
+            SkuProductEntity.ActivityCount activityCount = SkuProductEntity.ActivityCount.builder()
+                    .totalCount(raffleActivityCountRes.getTotalCount())
+                    .dayCount(raffleActivityCountRes.getDayCount())
+                    .monthCount(raffleActivityCountRes.getMonthCount())
+                    .build();
+            skuProductEntity.setActivityCount(activityCount);
+        }
+        return skuProductEntityList;
     }
 }

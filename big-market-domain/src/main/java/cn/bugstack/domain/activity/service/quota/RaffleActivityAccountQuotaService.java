@@ -3,18 +3,19 @@ package cn.bugstack.domain.activity.service.quota;
 import cn.bugstack.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.bugstack.domain.activity.model.entity.*;
 import cn.bugstack.domain.activity.model.valobj.ActivitySkuStockKeyVO;
-import cn.bugstack.domain.activity.model.valobj.OrderStateVO;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
+import cn.bugstack.domain.activity.service.IRaffleActivitySkuProductService;
 import cn.bugstack.domain.activity.service.quota.policy.ITradePolicy;
 import cn.bugstack.domain.activity.service.quota.rule.factory.DefaultActivityChainFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
-public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAccountQuota {
+public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAccountQuota implements IRaffleActivitySkuProductService {
 
 
     public RaffleActivityAccountQuotaService(DefaultActivityChainFactory activityChainFactory, IActivityRepository activityRepository, Map<String, ITradePolicy> tradePolicyGroup) {
@@ -97,5 +98,10 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
     public void updateOrder(DeliveryOrderEntity deliveryOrderEntity) {
         // 当订单完成时，更新订单信息
         activityRepository.updateOrder(deliveryOrderEntity);
+    }
+
+    @Override
+    public List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId) {
+        return activityRepository.querySkuProductEntityListByActivityId(activityId);
     }
 }

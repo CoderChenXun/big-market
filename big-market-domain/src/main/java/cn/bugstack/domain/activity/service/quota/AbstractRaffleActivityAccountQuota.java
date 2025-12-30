@@ -1,10 +1,7 @@
 package cn.bugstack.domain.activity.service.quota;
 
 import cn.bugstack.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
-import cn.bugstack.domain.activity.model.entity.ActivityCountEntity;
-import cn.bugstack.domain.activity.model.entity.ActivityEntity;
-import cn.bugstack.domain.activity.model.entity.ActivitySkuEntity;
-import cn.bugstack.domain.activity.model.entity.SkuRechargeEntity;
+import cn.bugstack.domain.activity.model.entity.*;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
 import cn.bugstack.domain.activity.service.IRaffleActivityAccountQuotaService;
 import cn.bugstack.domain.activity.service.IRaffleActivitySkuStockService;
@@ -30,7 +27,7 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
     }
 
     @Override
-    public String createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity) {
+    public UnpaidActivityOrderEntity createSkuRechargeOrder(SkuRechargeEntity skuRechargeEntity) {
         // 1. 参数检验
         String userId = skuRechargeEntity.getUserId();
         Long sku = skuRechargeEntity.getSku();
@@ -40,6 +37,11 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
             throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
         }
 
+        // 1.1 查询是否存在等待支付的订单
+        UnpaidActivityOrderEntity unpaidActivityOrderEntity = activityRepository.queryUnpaidActivityOrder(skuRechargeEntity);
+        if (null != unpaidActivityOrderEntity) {
+            return unpaidActivityOrderEntity;
+        }
         // 2. 查询基础信息
         // 2.1 查询sku信息
         ActivitySkuEntity activitySkuEntity = queryActivitySku(sku);
@@ -50,7 +52,7 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
         // 2.3 查询活动参与次数ActivityCount信息
         ActivityCountEntity activityCountEntity = queryRaffleActivityCountByActivityCountId(activitySkuEntity.getActivityCountId());
 
-        // 3. 基于查询到的基础信息进行规则链过滤
+        // 3. 基于查询到的基础信息进行规则链过滤，同时趋势扣减sku库存
         IActionChain actionChain = activityChainFactory.openActionChain();
         Boolean success = actionChain.action(activityEntity, activitySkuEntity, activityCountEntity);
 
@@ -62,7 +64,12 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
         tradePolicy.trade(createQuotaOrderAggregate);
 
         // 6. 返回单号
-        return createQuotaOrderAggregate.getActivityOrderEntity().getOrderId();
+        return UnpaidActivityOrderEntity.builder()
+                .userId(userId)
+                .orderId(createQuotaOrderAggregate.getActivityOrderEntity().getOrderId())
+                .payAmount(createQuotaOrderAggregate.getActivityOrderEntity().getPayAmount())
+                .outBusinessNo(outBusinessNo)
+                .build();
     }
 
     protected abstract CreateQuotaOrderAggregate buildOrderAggregate(SkuRechargeEntity skuRechargeEntity, ActivityEntity activityEntity, ActivitySkuEntity activitySkuEntity, ActivityCountEntity activityCountEntity);
