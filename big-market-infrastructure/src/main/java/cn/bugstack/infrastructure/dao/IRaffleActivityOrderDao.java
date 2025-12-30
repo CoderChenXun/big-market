@@ -18,4 +18,9 @@ public interface IRaffleActivityOrderDao {
     // 根据用户ID查询抽奖活动订单
     @DBRouter
     List<RaffleActivityOrder> queryRaffleActivityOrderByUserId(String userId);
+
+    @DBRouter
+    RaffleActivityOrder queryRaffleActivityOrder(RaffleActivityOrder raffleActivityOrderReq);
+
+    int updateOrderCompleted(RaffleActivityOrder raffleActivityOrderReq);
 }

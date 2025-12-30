@@ -3,11 +3,17 @@ package cn.bugstack.infrastructure.adapter.repository;
 import cn.bugstack.domain.credit.model.aggregate.TradeAggregate;
 import cn.bugstack.domain.credit.model.entity.CreditAccountEntity;
 import cn.bugstack.domain.credit.model.entity.CreditOrderEntity;
+import cn.bugstack.domain.credit.model.entity.TaskEntity;
+import cn.bugstack.domain.credit.model.valobj.TradeTypeVO;
 import cn.bugstack.domain.credit.repository.ICreditRepository;
+import cn.bugstack.domain.rebate.model.valobj.TaskStateVO;
+import cn.bugstack.infrastructure.dao.ITaskDao;
 import cn.bugstack.infrastructure.dao.IUserCreditAccountDao;
 import cn.bugstack.infrastructure.dao.IUserCreditOrderDao;
+import cn.bugstack.infrastructure.dao.po.Task;
 import cn.bugstack.infrastructure.dao.po.UserCreditAccount;
 import cn.bugstack.infrastructure.dao.po.UserCreditOrder;
+import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.bugstack.types.common.Constants;
@@ -44,12 +50,19 @@ public class CreditRepository implements ICreditRepository {
     @Resource
     private TransactionTemplate transactionTemplate;
 
+    @Resource
+    private EventPublisher eventPublisher;
+
+    @Resource
+    private ITaskDao taskDao;
+
 
     @Override
     public void saveUserCreditTradeOrder(TradeAggregate tradeAggregate) {
         String userId = tradeAggregate.getUserId();
         CreditAccountEntity creditAccountEntity = tradeAggregate.getCreditAccountEntity();
         CreditOrderEntity creditOrderEntity = tradeAggregate.getCreditOrderEntity();
+        TaskEntity taskEntity = tradeAggregate.getTaskEntity();
 
         // 组装积分账户对象
         UserCreditAccount userCreditAccountReq = new UserCreditAccount();
@@ -65,6 +78,13 @@ public class CreditRepository implements ICreditRepository {
         userCreditOrderReq.setTradeType(creditOrderEntity.getTradeType().getCode());
         userCreditOrderReq.setTradeAmount(creditOrderEntity.getTradeAmount());
         userCreditOrderReq.setOutBusinessNo(creditOrderEntity.getOutBusinessNo());
+
+        Task task = new Task();
+        task.setUserId(taskEntity.getUserId());
+        task.setTopic(taskEntity.getTopic());
+        task.setMessageId(taskEntity.getMessageId());
+        task.setMessage(taskEntity.getMessageId());
+        task.setState(TaskStateVO.create.getCode());
 
         // 注意分库分表
         RLock lock = redisService.getLock(Constants.RedisKey.USER_CREDIT_ACCOUNT_LOCK + userId + Constants.UNDERLINE + creditOrderEntity.getOutBusinessNo());
@@ -85,6 +105,8 @@ public class CreditRepository implements ICreditRepository {
                     }
                     // 2. 插入用户积分订单
                     userCreditOrderDao.insert(userCreditOrderReq);
+                    // 3. 插入任务实体
+                    taskDao.insert(task);
                 } catch (DuplicateKeyException e) {
                     log.error("调整账户积分额度异常，唯一索引冲突 userId:{} orderId:{}", userId, creditOrderEntity.getOrderId(), e);
                     status.setRollbackOnly();
@@ -98,6 +120,19 @@ public class CreditRepository implements ICreditRepository {
             dbRouter.clear();
             // 解锁
             lock.unlock();
+        }
+
+        // 只有在积分支付时才需要发送MQ消息
+        if(TradeTypeVO.REVERSE.equals(creditOrderEntity.getTradeType())){
+            try {
+                eventPublisher.publish(taskEntity.getTopic(), taskEntity.getMessage());
+                // 更新Task状态
+                taskDao.updateTaskSendMessageCompleted(task);
+                log.info("调整账户积分记录，发送MQ消息完成 userId: {} orderId:{} topic: {}", userId, creditOrderEntity.getOrderId(), task.getTopic());
+            }catch(Exception e){
+                log.error("调整账户积分记录，发送MQ消息失败 userId: {} topic: {}", userId, task.getTopic());
+                taskDao.updateTaskSendMessageFail(task);
+            }
         }
     }
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -68,6 +70,11 @@ public class ActivityOrderEntity {
      * 订单状态
      */
     private OrderStateVO state;
+
+    /**
+     * 需要的积分值或券值
+     */
+    private BigDecimal payAmount;
 
     /**
      * 业务仿重ID - 外部透传的，确保幂等

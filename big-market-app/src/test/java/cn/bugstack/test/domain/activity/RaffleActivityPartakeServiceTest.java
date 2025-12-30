@@ -1,4 +1,4 @@
-package cn.bugstack.test.domain;
+package cn.bugstack.test.domain.activity;
 
 import cn.bugstack.domain.activity.model.entity.PartakeRaffleActivityEntity;
 import cn.bugstack.domain.activity.model.entity.UserRaffleOrderEntity;

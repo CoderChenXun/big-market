@@ -1,4 +1,4 @@
-package cn.bugstack.test.domain;
+package cn.bugstack.test.domain.credit;
 
 import cn.bugstack.domain.credit.model.entity.TradeEntity;
 import cn.bugstack.domain.credit.model.valobj.TradeNameVO;
@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: coderLan
@@ -47,5 +48,19 @@ public class CreditDomainTest {
         tradeEntity.setOutBusinessNo("20251229218");
         String orderId = creditAdjustService.createOrder(tradeEntity);
         log.info("测试结果：{}", orderId);
+    }
+
+    @Test
+    public void test_credit_pay_order() throws InterruptedException {
+        TradeEntity tradeEntity = new TradeEntity();
+        tradeEntity.setUserId("xiaofuge");
+        tradeEntity.setTradeName(TradeNameVO.CONVERT_SKU);
+        tradeEntity.setTradeType(TradeTypeVO.REVERSE);
+        tradeEntity.setOutBusinessNo("251230009113");
+        tradeEntity.setAmount(new BigDecimal("-1.68"));
+        String orderId = creditAdjustService.createOrder(tradeEntity);
+        log.info("测试结果：{}", orderId);
+
+        new CountDownLatch(1).await();
     }
 }

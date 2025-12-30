@@ -1,4 +1,4 @@
-package cn.bugstack.test.domain;
+package cn.bugstack.test.domain.award;
 
 import cn.bugstack.domain.award.model.entity.UserAwardRecordEntity;
 import cn.bugstack.domain.award.model.valobj.AwardStateVO;
