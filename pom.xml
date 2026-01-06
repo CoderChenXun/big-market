@@ -180,6 +180,12 @@
                 <artifactId>nacos-client</artifactId>
                 <version>2.1.0</version>
             </dependency>
+            <!--   zookeeper配置   -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>
+                <version>3.1.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

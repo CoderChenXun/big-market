@@ -25,6 +25,7 @@ import cn.bugstack.domain.strategy.model.entity.RaffleAwardEntity;
 import cn.bugstack.domain.strategy.model.entity.RaffleFactorEntity;
 import cn.bugstack.domain.strategy.service.IRaffleStrategy;
 import cn.bugstack.domain.strategy.service.armory.IStrategyArmory;
+import cn.bugstack.types.annotations.DCCValue;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
 import com.alibaba.fastjson2.JSON;
@@ -78,6 +79,9 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Resource
     private IRaffleActivitySkuProductService raffleActivitySkuProductService;
 
+    @DCCValue("degradeSwitch:open")
+    private String degradeSwitch;
+
 
     @RequestMapping(value = "armory", method = RequestMethod.GET)
     @Override
@@ -117,6 +121,13 @@ public class RaffleActivityController implements IRaffleActivityService {
                 throw new AppException(ResponseCode.ILLEGAL_PARAMETER.getCode(), ResponseCode.ILLEGAL_PARAMETER.getInfo());
             }
             log.info("抽奖开始 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
+            // 1.1 降级策略
+            if(! "open".equals(degradeSwitch)){
+                return Response.<ActivityDrawResponseDTO>builder()
+                        .code(ResponseCode.DEGRADE_SWITCH.getCode())
+                        .info(ResponseCode.DEGRADE_SWITCH.getInfo())
+                        .build();
+            }
             // 2. 创建抽奖单
             UserRaffleOrderEntity orderEntity = raffleActivityPartakeService.createOrder(request.getUserId(), request.getActivityId());
             log.info("活动抽奖，创建订单 userId:{} activityId:{} orderId:{}", request.getUserId(), request.getActivityId(), orderEntity.getOrderId());

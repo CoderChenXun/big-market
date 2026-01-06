@@ -4,31 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix：对接联调积分流程接口-修复积分兑换sku时的一系列问题">
+    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat：开发运维 第3节：引入nacos + dubbo框架">
+      <change afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/IDCCService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/ZookeeperClientConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/ZookeeperClientConfigProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/DCCController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/annotations/DCCValue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductShopCartRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductShopCartRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_raffle_order_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_raffle_order_mapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/ApiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/quota/AbstractRaffleActivityAccountQuota.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/quota/AbstractRaffleActivityAccountQuota.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/CreditRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/CreditRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-trigger/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleStrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleStrategyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="AnnotationType" />
         <option value="Enum" />
+        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -120,7 +107,7 @@
       <recent name="cn.bugstack.domain.rebate.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ApiTest.test_rpc">
+  <component name="RunManager" selected="Spring Boot.Application">
     <configuration name="ApiTest.test_rpc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
@@ -219,6 +206,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpringBootOptions">
+    <option name="showAdditionalConfigNotification" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="" />
@@ -372,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1767668116008</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat：开发运维 第3节：引入nacos + dubbo框架">
+      <created>1767690435542</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1767690435542</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -437,7 +434,23 @@
     <MESSAGE value="fix: 修复 user_credit_account_mapper.xml 错误配置" />
     <MESSAGE value="feat：营销服务 第28节：积分应用场景接口实现" />
     <MESSAGE value="fix：对接联调积分流程接口-修复积分兑换sku时的一系列问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix：对接联调积分流程接口-修复积分兑换sku时的一系列问题" />
+    <MESSAGE value="feat：开发运维 第3节：引入nacos + dubbo框架" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat：开发运维 第3节：引入nacos + dubbo框架" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="16" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
