@@ -6,6 +6,30 @@
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix：对接联调积分流程接口-修复积分兑换sku时的一系列问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/ActivityDrawResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleAwardListResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/RaffleStrategyRuleWeightResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductShopCartRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/SkuProductShopCartRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-api/src/main/java/cn/bugstack/api/dto/UserActivityAccountResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_raffle_order_mapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/resources/mybatis/mapper/user_raffle_order_mapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/ApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/ApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/trigger/RaffleActivityControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/quota/AbstractRaffleActivityAccountQuota.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-domain/src/main/java/cn/bugstack/domain/activity/service/quota/AbstractRaffleActivityAccountQuota.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/CreditRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-infrastructure/src/main/java/cn/bugstack/infrastructure/adapter/repository/CreditRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleStrategyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleStrategyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,29 +72,29 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
-    "spring.configuration.checksum": "d87e9702065bd5a48cf4c79dac930ad6"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;d87e9702065bd5a48cf4c79dac930ad6&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -96,18 +120,18 @@
       <recent name="cn.bugstack.domain.rebate.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RaffleActivityControllerTest.test_creditPayExchangeSku">
-    <configuration name="CreditDomainTest.test_credit_pay_order" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ApiTest.test_rpc">
+    <configuration name="ApiTest.test_rpc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.domain.credit.*" />
+          <option name="PATTERN" value="cn.bugstack.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.domain.credit" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.domain.credit.CreditDomainTest" />
-      <option name="METHOD_NAME" value="test_credit_pay_order" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.ApiTest" />
+      <option name="METHOD_NAME" value="test_rpc" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -186,11 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ApiTest.test_rpc" />
+        <item itemvalue="JUnit.RaffleActivitySkuProductServiceTest.test_querySkuProductEntityListByActivityId" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_creditPayExchangeSku" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_queryUserCreditAccount" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_querySkuProductListByActivityId" />
-        <item itemvalue="JUnit.RaffleActivitySkuProductServiceTest.test_querySkuProductEntityListByActivityId" />
-        <item itemvalue="JUnit.CreditDomainTest.test_credit_pay_order" />
       </list>
     </recent_temporary>
   </component>

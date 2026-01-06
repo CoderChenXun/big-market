@@ -22,6 +22,8 @@
         where user_id = #{userId}
           and activity_id = #{activityId}
           and order_state = 'create'
+        order by order_time desc
+        limit 1
     </select>
 
     <insert id="insert" parameterType="cn.bugstack.infrastructure.dao.po.UserRaffleOrder">

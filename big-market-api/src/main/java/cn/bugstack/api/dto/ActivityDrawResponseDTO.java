@@ -5,11 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActivityDrawResponseDTO {
+public class ActivityDrawResponseDTO implements Serializable {
+    private static final long serialVersionUID = 687333908750230081L;
     // 奖品ID
     private Integer awardId;
     // 奖品标题

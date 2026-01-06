@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @Author: coderLan
  * @Description: 查询用户抽奖账户的返回结果
@@ -14,7 +16,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserActivityAccountResponseDTO {
+public class UserActivityAccountResponseDTO implements Serializable {
+
+    private static final long serialVersionUID = -4926366500659967947L;
     /**
      * 用户抽奖总次数
      */

@@ -125,3 +125,17 @@ spring:
       send_award: send_award
       send_rebate: send_rebate
       credit_adjust_success: credit_adjust_success
+
+# dubbo配置
+dubbo:
+  application:
+    name: big-market
+    version: 1.0
+  registry:
+    id: nacos-registry
+    address: nacos://127.0.0.1:8848
+  protocol:
+    name: dubbo
+    port: -1
+  scan:
+    base-packages: cn.bugstack.trigger.api

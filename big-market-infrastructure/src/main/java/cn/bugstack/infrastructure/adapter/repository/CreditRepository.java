@@ -20,6 +20,7 @@ import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.bugstack.types.common.Constants;
 import cn.bugstack.types.enums.ResponseCode;
 import cn.bugstack.types.exception.AppException;
+import com.alibaba.fastjson.JSON;
 import com.esotericsoftware.minlog.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -88,7 +89,7 @@ public class CreditRepository implements ICreditRepository {
         task.setUserId(taskEntity.getUserId());
         task.setTopic(taskEntity.getTopic());
         task.setMessageId(taskEntity.getMessageId());
-        task.setMessage(taskEntity.getMessageId());
+        task.setMessage(JSON.toJSONString(taskEntity.getMessage()));
         task.setState(TaskStateVO.create.getCode());
 
         // 注意分库分表

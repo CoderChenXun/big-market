@@ -31,6 +31,7 @@ import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -45,6 +46,7 @@ import java.util.stream.Collectors;
 @RestController
 @CrossOrigin("${app.config.cross-origin}")
 @RequestMapping("/api/${app.config.api-version}/raffle/activity/")
+@DubboService(version = "1.0")
 public class RaffleActivityController implements IRaffleActivityService {
 
     private final SimpleDateFormat dateFormatDay = new SimpleDateFormat("yyyyMMdd");
@@ -292,7 +294,7 @@ public class RaffleActivityController implements IRaffleActivityService {
             String orderId = creditAdjustService.createOrder(TradeEntity.builder()
                     .userId(unpaidActivityOrderEntity.getUserId())
                     .tradeName(TradeNameVO.CONVERT_SKU)
-                    .tradeType(TradeTypeVO.REVERSE)
+                    .tradeType(TradeTypeVO.FORWARD)
                     .amount(unpaidActivityOrderEntity.getPayAmount().negate())
                     .outBusinessNo(unpaidActivityOrderEntity.getOutBusinessNo())
                     .build());
@@ -364,7 +366,7 @@ public class RaffleActivityController implements IRaffleActivityService {
                         .activityCountId(skuProductEntity.getActivityCountId())
                         .stockCount(skuProductEntity.getStockCount())
                         .stockCountSurplus(skuProductEntity.getStockCountSurplus())
-                        .payAmount(skuProductEntity.getPayAmount())
+                        .productAmount(skuProductEntity.getPayAmount())
                         .activityCount(SkuProductResponseDTO.ActivityCount.builder()
                                 .dayCount(skuProductEntity.getActivityCount().getDayCount())
                                 .monthCount(skuProductEntity.getActivityCount().getMonthCount())

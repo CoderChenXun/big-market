@@ -40,9 +40,11 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
         }
 
         // 1.1 查询是否存在等待支付的订单
-        UnpaidActivityOrderEntity unpaidActivityOrderEntity = activityRepository.queryUnpaidActivityOrder(skuRechargeEntity);
-        if (null != unpaidActivityOrderEntity) {
-            return unpaidActivityOrderEntity;
+        if(OrderTradeTypeVO.credit_pay_trade.equals(skuRechargeEntity.getTradeType())){
+            UnpaidActivityOrderEntity unpaidActivityOrderEntity = activityRepository.queryUnpaidActivityOrder(skuRechargeEntity);
+            if (null != unpaidActivityOrderEntity) {
+                return unpaidActivityOrderEntity;
+            }
         }
         // 2. 查询基础信息
         // 2.1 查询sku信息

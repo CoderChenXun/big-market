@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -16,7 +17,9 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SkuProductResponseDTO {
+public class SkuProductResponseDTO implements Serializable {
+
+    private static final long serialVersionUID = 8185328726051792645L;
     /**
      * 商品sku
      */
@@ -40,7 +43,7 @@ public class SkuProductResponseDTO {
     /**
      * payAmount 支付金额
      */
-    private BigDecimal payAmount;
+    private BigDecimal productAmount;
     /**
      * 活动次数
      */

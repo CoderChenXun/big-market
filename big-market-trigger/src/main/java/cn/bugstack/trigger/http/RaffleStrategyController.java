@@ -17,6 +17,7 @@ import cn.bugstack.types.exception.AppException;
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -30,6 +31,7 @@ import java.util.stream.Stream;
 @RestController
 @CrossOrigin("${app.config.cross-origin}")
 @RequestMapping("/api/${app.config.api-version}/raffle/strategy/")
+@DubboService(version = "1.0")
 public class RaffleStrategyController implements IRaffleStrategyService {
     /**
      * 策略装配接口
