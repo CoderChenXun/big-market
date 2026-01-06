@@ -1,5 +1,6 @@
 package cn.bugstack.infrastructure.adapter.repository;
 
+import cn.bugstack.domain.award.model.valobj.AccountStatusVO;
 import cn.bugstack.domain.credit.model.aggregate.TradeAggregate;
 import cn.bugstack.domain.credit.model.entity.CreditAccountEntity;
 import cn.bugstack.domain.credit.model.entity.CreditOrderEntity;
@@ -17,6 +18,8 @@ import cn.bugstack.infrastructure.event.EventPublisher;
 import cn.bugstack.infrastructure.redis.IRedisService;
 import cn.bugstack.middleware.db.router.strategy.IDBRouterStrategy;
 import cn.bugstack.types.common.Constants;
+import cn.bugstack.types.enums.ResponseCode;
+import cn.bugstack.types.exception.AppException;
 import com.esotericsoftware.minlog.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
@@ -25,6 +28,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -69,6 +73,7 @@ public class CreditRepository implements ICreditRepository {
         userCreditAccountReq.setUserId(userId);
         userCreditAccountReq.setTotalAmount(creditAccountEntity.getAdjustAmount());
         userCreditAccountReq.setAvailableAmount(creditAccountEntity.getAdjustAmount());
+        userCreditAccountReq.setAccountStatus(AccountStatusVO.open.getCode());
 
         // 组装用户积分订单对象
         UserCreditOrder userCreditOrderReq = new UserCreditOrder();
@@ -96,12 +101,23 @@ public class CreditRepository implements ICreditRepository {
                 try {
                     // 1. 首先查询积分账户是否存在
                     UserCreditAccount userCreditAccount = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
-                    if (null == userCreditAccount) {
+                    if (null == userCreditAccount && TradeTypeVO.REVERSE.equals(creditOrderEntity.getTradeType())) {
+                        throw new AppException(ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getCode(), ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getInfo());
+                    } else if (null == userCreditAccount) {
                         // 2. 插入积分账户
                         userCreditAccountDao.insert(userCreditAccountReq);
                     } else {
                         // 3. 更新积分账户
-                        userCreditAccountDao.updateAddAmount(userCreditAccountReq);
+                        BigDecimal availableAmount = userCreditAccountReq.getAvailableAmount();
+                        if (availableAmount.compareTo(BigDecimal.ZERO) >= 0) {
+                            userCreditAccountDao.updateAddAmount(userCreditAccountReq);
+                        }else {
+                            int subtractionCount = userCreditAccountDao.updateSubtractionAmount(userCreditAccountReq);
+                            if(1 != subtractionCount){
+                                status.setRollbackOnly();
+                                throw new AppException(ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getCode(), ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getInfo());
+                            }
+                        }
                     }
                     // 2. 插入用户积分订单
                     userCreditOrderDao.insert(userCreditOrderReq);
@@ -119,17 +135,19 @@ public class CreditRepository implements ICreditRepository {
         } finally {
             dbRouter.clear();
             // 解锁
-            lock.unlock();
+            if(lock.isLocked()){
+                lock.unlock();
+            }
         }
 
         // 只有在积分支付时才需要发送MQ消息
-        if(TradeTypeVO.REVERSE.equals(creditOrderEntity.getTradeType())){
+        if (TradeTypeVO.REVERSE.equals(creditOrderEntity.getTradeType())) {
             try {
                 eventPublisher.publish(taskEntity.getTopic(), taskEntity.getMessage());
                 // 更新Task状态
                 taskDao.updateTaskSendMessageCompleted(task);
                 log.info("调整账户积分记录，发送MQ消息完成 userId: {} orderId:{} topic: {}", userId, creditOrderEntity.getOrderId(), task.getTopic());
-            }catch(Exception e){
+            } catch (Exception e) {
                 log.error("调整账户积分记录，发送MQ消息失败 userId: {} topic: {}", userId, task.getTopic());
                 taskDao.updateTaskSendMessageFail(task);
             }
@@ -146,11 +164,15 @@ public class CreditRepository implements ICreditRepository {
             dbRouter.doRouter(userId);
             UserCreditAccount userCreditAccountRes = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
             // 2. 构建响应对象
+            BigDecimal availableAmount = BigDecimal.ZERO;
+            if(null != userCreditAccountRes){
+                availableAmount = userCreditAccountRes.getAvailableAmount();
+            }
             CreditAccountEntity creditAccountEntity = new CreditAccountEntity();
             creditAccountEntity.setUserId(userCreditAccountRes.getUserId());
-            creditAccountEntity.setAdjustAmount(userCreditAccountRes.getAvailableAmount());
+            creditAccountEntity.setAdjustAmount(availableAmount);
             return creditAccountEntity;
-        }finally {
+        } finally {
             dbRouter.clear();
         }
     }

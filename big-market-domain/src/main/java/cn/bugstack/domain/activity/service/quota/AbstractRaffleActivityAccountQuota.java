@@ -2,6 +2,7 @@ package cn.bugstack.domain.activity.service.quota;
 
 import cn.bugstack.domain.activity.model.aggregate.CreateQuotaOrderAggregate;
 import cn.bugstack.domain.activity.model.entity.*;
+import cn.bugstack.domain.activity.model.valobj.OrderTradeTypeVO;
 import cn.bugstack.domain.activity.repository.IActivityRepository;
 import cn.bugstack.domain.activity.service.IRaffleActivityAccountQuotaService;
 import cn.bugstack.domain.activity.service.IRaffleActivitySkuStockService;
@@ -13,6 +14,7 @@ import cn.bugstack.types.exception.AppException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @Slf4j
@@ -51,6 +53,14 @@ public abstract class AbstractRaffleActivityAccountQuota extends RaffleActivityA
 
         // 2.3 查询活动参与次数ActivityCount信息
         ActivityCountEntity activityCountEntity = queryRaffleActivityCountByActivityCountId(activitySkuEntity.getActivityCountId());
+
+        // 2.4 账户额度 【交易属性的兑换，需要校验额度账户】,比如说积分兑换sku，需要查询用户积分额度
+        if(OrderTradeTypeVO.credit_pay_trade.equals(skuRechargeEntity.getTradeType())){
+            BigDecimal availableAmount = activityRepository.queryUserCreditAccountAmount(userId);
+            if(availableAmount.compareTo(activitySkuEntity.getPayAmount()) < 0){
+                throw new AppException(ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getCode(), ResponseCode.USER_CREDIT_ACCOUNT_NO_AVAILABLE_AMOUNT.getInfo());
+            }
+        }
 
         // 3. 基于查询到的基础信息进行规则链过滤，同时趋势扣减sku库存
         IActionChain actionChain = activityChainFactory.openActionChain();

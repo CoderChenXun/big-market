@@ -27,6 +27,7 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -63,6 +64,9 @@ public class ActivityRepository implements IActivityRepository {
 
     @Resource
     private IUserRaffleOrderDao userRaffleOrderDao;
+
+    @Resource
+    private IUserCreditAccountDao userCreditAccountDao;
 
     @Resource
     private ActivitySkuStockZeroMessageEvent activitySkuStockZeroMessageEvent;
@@ -665,6 +669,14 @@ public class ActivityRepository implements IActivityRepository {
             raffleActivityOrderReq.setOutBusinessNo(deliveryOrderEntity.getOutBusinessNo());
             RaffleActivityOrder raffleActivityOrderRes = raffleActivityOrderDao.queryRaffleActivityOrder(raffleActivityOrderReq);
 
+            // 1.1 如果未查询到活动订单，解锁
+            if (null == raffleActivityOrderRes) {
+                if (lock.isLocked()) {
+                    lock.unlock();
+                }
+                return;
+            }
+
             // 2. 更新活动总账户
             RaffleActivityAccount raffleActivityAccount = new RaffleActivityAccount();
             raffleActivityAccount.setUserId(raffleActivityOrderRes.getUserId());
@@ -725,7 +737,10 @@ public class ActivityRepository implements IActivityRepository {
                 }
             });
         } finally {
-            lock.unlock();
+            dbRouter.clear();
+            if (lock.isLocked()) {
+                lock.unlock();
+            }
         }
     }
 
@@ -739,7 +754,7 @@ public class ActivityRepository implements IActivityRepository {
         raffleActivityOrderReq.setSku(sku);
         // 查询
         RaffleActivityOrder raffleActivityOrderRes = raffleActivityOrderDao.queryUnpaidActivityOrder(raffleActivityOrderReq);
-        if(null == raffleActivityOrderRes){
+        if (null == raffleActivityOrderRes) {
             return null;
         }
         // 组装返回结果
@@ -773,7 +788,7 @@ public class ActivityRepository implements IActivityRepository {
                     .build();
         }).collect(Collectors.toList());
         // 2. 联合查询activityCount信息
-        for(SkuProductEntity skuProductEntity : skuProductEntityList){
+        for (SkuProductEntity skuProductEntity : skuProductEntityList) {
             RaffleActivityCount raffleActivityCountRes = raffleActivityCountDao.queryRaffleActivityCountByActivityCountId(skuProductEntity.getActivityCountId());
             SkuProductEntity.ActivityCount activityCount = SkuProductEntity.ActivityCount.builder()
                     .totalCount(raffleActivityCountRes.getTotalCount())
@@ -783,5 +798,19 @@ public class ActivityRepository implements IActivityRepository {
             skuProductEntity.setActivityCount(activityCount);
         }
         return skuProductEntityList;
+    }
+
+    @Override
+    public BigDecimal queryUserCreditAccountAmount(String userId) {
+        UserCreditAccount userCreditAccountReq = new UserCreditAccount();
+        userCreditAccountReq.setUserId(userId);
+        // 注意分库分表
+        try {
+            dbRouter.doRouter(userId);
+            UserCreditAccount userCreditAccountRes = userCreditAccountDao.queryUserCreditAccount(userCreditAccountReq);
+            return null == userCreditAccountRes ? BigDecimal.ZERO : userCreditAccountRes.getAvailableAmount();
+        } finally {
+            dbRouter.clear();
+        }
     }
 }

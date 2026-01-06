@@ -303,7 +303,13 @@ public class RaffleActivityController implements IRaffleActivityService {
                     .info(ResponseCode.SUCCESS.getInfo())
                     .data(orderId != null)
                     .build();
-        } catch (Exception e) {
+        } catch (AppException e) {
+            log.error("积分兑换商品失败 userId:{} sku:{}",  request.getUserId(), request.getSku(), e);
+            return Response.<Boolean>builder()
+                    .code(e.getCode())
+                    .info(e.getInfo())
+                    .build();
+        }  catch (Exception e) {
             log.error("积分支付交换sku订单失败 userId:{} sku:{}", request.getUserId(), request.getSku());
             return Response.<Boolean>builder()
                     .code(ResponseCode.UN_ERROR.getCode())
