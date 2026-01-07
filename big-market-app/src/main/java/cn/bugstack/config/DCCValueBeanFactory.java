@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.cache.CuratorCache;
+import org.springframework.aop.framework.AopProxyUtils;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Configuration;
@@ -59,9 +61,14 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                     }
 
                     try {
+                        Class<?> objBeanClass = objBean.getClass();
+                        // 检查objBean是否是代理对象
+                        if(AopUtils.isAopProxy(objBean)){
+                            objBeanClass = AopUtils.getTargetClass(objBean);
+                        }
                         String fieldName = dccValuePath.substring(dccValuePath.lastIndexOf("/") + 1);
                         // 反射获取Bean的字段
-                        Field filed = objBean.getClass().getDeclaredField(fieldName);
+                        Field filed = objBeanClass.getDeclaredField(fieldName);
                         filed.setAccessible(true);
                         filed.set(objBean, new String(data.getData()));
                         filed.setAccessible(false);
@@ -85,9 +92,14 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         // 反射获取属性
-        Class<?> beanClass = bean.getClass();
-        Field[] fields = beanClass.getDeclaredFields();
+        Class<?> targetBeanClass = bean.getClass();
+        Object targetBeanObject = bean;
+        if(AopUtils.isAopProxy(bean)){
+            targetBeanClass = AopUtils.getTargetClass(bean);
+            targetBeanObject = AopProxyUtils.getSingletonTarget( bean);
+        }
 
+        Field[] fields = targetBeanClass.getDeclaredFields();
         for (Field field : fields) {
             // 如果存在@DCCValue注解
             if(field.isAnnotationPresent(DCCValue.class)){
@@ -110,7 +122,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                         client.create().creatingParentsIfNeeded().forPath(keyPath);
                         if(StringUtils.isNotBlank(defaultValue)){
                             field.setAccessible(true);
-                            field.set(bean, defaultValue);
+                            field.set(targetBeanObject, defaultValue);
                             field.setAccessible(false);
                         }
                         log.info("DCC 节点监听 创建节点：{}", keyPath);
@@ -119,7 +131,7 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
                         String configValue = new String(client.getData().forPath(keyPath));
                         if(StringUtils.isNotBlank(configValue)){
                             field.setAccessible(true);
-                            field.set(bean, configValue);
+                            field.set(targetBeanObject, configValue);
                             field.setAccessible(false);
                         }
                         log.info("DCC 节点监听 设置配置 {} {} {}", keyPath, field.getName(), configValue);

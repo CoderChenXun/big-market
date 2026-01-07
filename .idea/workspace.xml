@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="feat：开发运维 第3节：引入nacos + dubbo框架">
+    <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix：修复Maven阿里云仓库问题">
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/aop/RateLimiterAOP.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/annotations/RateLimiterAccessInterceptor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/big-market-types/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-types/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="AnnotationType" />
         <option value="Interface" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -26,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="260106-coderlan-dynamic-config-center" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -359,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1767690435542</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix：修复Maven阿里云仓库问题">
+      <created>1767705547343</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1767705547343</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +438,8 @@
     <MESSAGE value="feat：营销服务 第28节：积分应用场景接口实现" />
     <MESSAGE value="fix：对接联调积分流程接口-修复积分兑换sku时的一系列问题" />
     <MESSAGE value="feat：开发运维 第3节：引入nacos + dubbo框架" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat：开发运维 第3节：引入nacos + dubbo框架" />
+    <MESSAGE value="fix：修复Maven阿里云仓库问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix：修复Maven阿里云仓库问题" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -434,11 +448,6 @@
           <properties class="java.lang.IllegalArgumentException" package="java.lang" />
           <option name="timeStamp" value="16" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java</url>
-          <line>93</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
