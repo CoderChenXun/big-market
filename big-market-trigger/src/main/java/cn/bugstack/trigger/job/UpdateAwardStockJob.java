@@ -3,13 +3,17 @@ package cn.bugstack.trigger.job;
 import cn.bugstack.domain.strategy.model.valobj.StrategyAwardStockKeyVO;
 import cn.bugstack.domain.strategy.service.IRaffleAward;
 import cn.bugstack.domain.strategy.service.IRaffleStock;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component()
@@ -23,9 +27,19 @@ public class UpdateAwardStockJob {
 
     @Resource
     private ThreadPoolExecutor executor;
-    @Scheduled(cron = "0/5 * * * * ?")
+
+    @Resource
+    private RedissonClient redissonClient;
+    @XxlJob("updateAwardStock")
     public void exec() {
+        RLock lock = redissonClient.getLock("big-market-updateAwardStockJob");
+        boolean isLocked = false;
         try {
+            // 先上锁
+            isLocked = lock.tryLock(3, 0, TimeUnit.SECONDS);
+            if(!isLocked){
+                return;
+            }
             // 不同的活动奖品放到不同的阻塞队列中
             List<StrategyAwardStockKeyVO> strategyAwardStockKeyVOList = raffleAward.queryOpenActivityStrategyAwardList();
             if(null == strategyAwardStockKeyVOList){
@@ -47,6 +61,10 @@ public class UpdateAwardStockJob {
             }
         } catch (Exception e) {
             log.error("定时任务，更新奖品消耗库存失败", e);
+        }finally {
+            if(isLocked){
+                lock.unlock();
+            }
         }
     }
 }
