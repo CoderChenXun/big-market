@@ -82,7 +82,8 @@ public class RaffleActivityController implements IRaffleActivityService {
     @Resource
     private IRaffleActivitySkuProductService raffleActivitySkuProductService;
 
-    @DCCValue("degradeSwitch:close")
+    // TODO：关闭降级策略
+    //    @DCCValue("degradeSwitch:close")
     private String degradeSwitch;
 
 

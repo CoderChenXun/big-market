@@ -40,7 +40,9 @@ public interface IStrategyRepository {
 
     void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO);
 
-    StrategyAwardStockKeyVO takeQueueValue();
+    StrategyAwardStockKeyVO takeQueueValue()throws InterruptedException;
+
+    StrategyAwardStockKeyVO takeQueueValue(Long strategyId, Integer awardId)throws InterruptedException;
 
     void updateStrategyAwardStock(Long strategyId, Integer awardId);
 
@@ -57,4 +59,6 @@ public interface IStrategyRepository {
     Integer queryTodayUserRaffleCount(String userId, Long strategyId);
 
     Integer queryUserRaffleCount(String userId, Long strategyId);
+
+    List<StrategyAwardStockKeyVO> queryOpenActivityStrategyAwardList();
 }

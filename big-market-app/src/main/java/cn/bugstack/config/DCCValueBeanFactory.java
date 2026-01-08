@@ -8,6 +8,7 @@ import org.apache.curator.framework.recipes.cache.CuratorCache;
 import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,14 +30,15 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
     private static final String BASE_CONFIG_PATH_CONFIG = "/big-market-dcc/config";
 
     // ZOOKEEPER CLIENT
-    private final CuratorFramework client;
+    @Autowired(required = false)
+    private CuratorFramework client;
 
     // 缓存：Zookeeper节点路径 → 对应的Bean对象，用于节点变更时快速找到要更新的Bean
     private final Map<String, Object> dccObjGroup = new HashMap<>();
 
     // 构造器注入
-    public DCCValueBeanFactory(CuratorFramework client) throws Exception {
-        this.client = client;
+    public DCCValueBeanFactory() throws Exception {
+        if(null == client)  return;
 
         // 1. 创建配置节点
         if (null == client.checkExists().forPath(BASE_CONFIG_PATH_CONFIG)) {
@@ -91,6 +93,9 @@ public class DCCValueBeanFactory implements BeanPostProcessor {
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+        if(null == client){
+            return bean;
+        }
         // 反射获取属性
         Class<?> targetBeanClass = bean.getClass();
         Object targetBeanObject = bean;

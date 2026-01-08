@@ -147,6 +147,7 @@ dubbo:
 zookeeper:
   sdk:
     config:
+      enabled: true
       connect-string: 127.0.0.1:2181
       base-sleep-time-ms: 1000
       max-retries: 3

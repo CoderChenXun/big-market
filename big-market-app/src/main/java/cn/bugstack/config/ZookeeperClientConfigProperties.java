@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "zookeeper.sdk.config", ignoreInvalidFields = true)
 public class ZookeeperClientConfigProperties {
-
+    private boolean enable;
     private String connectString;
     private int baseSleepTimeMs;
     private int maxRetries;

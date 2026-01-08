@@ -65,6 +65,11 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
     }
 
     @Override
+    public StrategyAwardStockKeyVO takeQueueValue(Long strategyId, Integer awardId) throws InterruptedException {
+        return repository.takeQueueValue(strategyId, awardId);
+    }
+
+    @Override
     public void updateStrategyAwardStock(Long strategyId, Integer awardId) {
         // 更新数据库的奖品库存
         repository.updateStrategyAwardStock(strategyId, awardId);
@@ -80,6 +85,12 @@ public class DefaultRaffleStrategy extends AbstractRaffleStrategy implements IRa
     public List<StrategyAwardEntity> queryStrategyAwardListByActivityId(Long activityId) {
         List<StrategyAwardEntity> awardEntityList = repository.queryStrategyAwardListByActivityId(activityId);
         return awardEntityList;
+    }
+
+    @Override
+    public List<StrategyAwardStockKeyVO> queryOpenActivityStrategyAwardList() {
+        // 查询开放活动对应抽奖策略奖品列表
+        return repository.queryOpenActivityStrategyAwardList();
     }
 
     @Override

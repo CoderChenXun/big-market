@@ -1,5 +1,6 @@
 package cn.bugstack.config;
 
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.elasticsearch.xpack.sql.jdbc.EsDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -40,9 +41,10 @@ public class DataSourceConfig {
     static class MysqlMyBatisConfig {
 
         @Bean("mysqlSqlSessionFactory")
-        public SqlSessionFactory mysqlSqlSessionFactory(DataSource mysqlDataSource) throws Exception {
+        public SqlSessionFactory mysqlSqlSessionFactory(DataSource mysqlDataSource, Interceptor dbRouterDynamicMybatisPlugin) throws Exception {
             SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
             factoryBean.setDataSource(mysqlDataSource);
+            factoryBean.setPlugins(dbRouterDynamicMybatisPlugin);
             factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mybatis/mapper/mysql/*.xml"));
             return factoryBean.getObject();
         }

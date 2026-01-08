@@ -296,7 +296,8 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public void awardStockConsumeSendQueue(StrategyAwardStockKeyVO strategyAwardStockKeyVO) {
-        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        // 当前抽奖策略的不同奖品放到不同的阻塞队列中
+        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY + Constants.UNDERLINE + strategyAwardStockKeyVO.getStrategyId() + Constants.UNDERLINE + strategyAwardStockKeyVO.getAwardId();
         // 将扣减库存时间存入到阻塞队列中
         RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
         RDelayedQueue<StrategyAwardStockKeyVO> delayedQueue = redisService.getDelayedQueue(blockingQueue);
@@ -304,9 +305,17 @@ public class StrategyRepository implements IStrategyRepository {
     }
 
     @Override
-    public StrategyAwardStockKeyVO takeQueueValue() {
+    public StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException{
         // 1. 组装缓存key
         String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY;
+        RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
+        return blockingQueue.poll();
+    }
+
+    @Override
+    public StrategyAwardStockKeyVO takeQueueValue(Long strategyId, Integer awardId) throws InterruptedException {
+        // 1. 组装缓存key
+        String cachedKey = Constants.RedisKey.STRATEGY_AWARD_COUNT_QUERY_KEY + Constants.UNDERLINE + strategyId + Constants.UNDERLINE + awardId;
         RBlockingQueue<StrategyAwardStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
         return blockingQueue.poll();
     }
@@ -458,5 +467,24 @@ public class StrategyRepository implements IStrategyRepository {
         raffleActivityAccountReq.setUserId(userId);
         RaffleActivityAccount raffleActivityAccountRes = raffleActivityAccountDao.queryActivityAccountByUserIdAndActivityId(raffleActivityAccountReq);
         return raffleActivityAccountRes == null ? 0 : raffleActivityAccountRes.getTotalCount() - raffleActivityAccountRes.getTotalCountSurplus();
+    }
+
+    @Override
+    public List<StrategyAwardStockKeyVO> queryOpenActivityStrategyAwardList() {
+        List<StrategyAward> strategyAwardList = strategyAwardDao.queryOpenActivityStrategyAwardList();
+        if(null == strategyAwardList || strategyAwardList.isEmpty()){
+            return null;
+        }
+        // 将数据转换成VO
+        List<StrategyAwardStockKeyVO> strategyAwardStockKeyVOS = strategyAwardList.stream()
+                .map(strategyAward -> {
+                    StrategyAwardStockKeyVO strategyAwardStockKeyVO = new StrategyAwardStockKeyVO();
+                    strategyAwardStockKeyVO.setAwardId(strategyAward.getAwardId());
+                    strategyAwardStockKeyVO.setStrategyId(strategyAward.getStrategyId());
+                    return strategyAwardStockKeyVO;
+                })
+                .collect(Collectors.toList());
+
+        return strategyAwardStockKeyVOS;
     }
 }

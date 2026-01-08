@@ -10,6 +10,8 @@ public interface IRaffleStock {
      */
     StrategyAwardStockKeyVO takeQueueValue() throws InterruptedException;
 
+    StrategyAwardStockKeyVO takeQueueValue(Long strategyId, Integer awardId) throws InterruptedException;
+
     /**
      * 更新奖品库存消耗记录
      *
