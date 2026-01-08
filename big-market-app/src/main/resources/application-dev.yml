@@ -112,6 +112,9 @@ app:
     api-version: v1
 # rabbitmq
 spring:
+  elasticsearch.dataSource:
+    driverClassName: org.elasticsearch.xpack.sql.jdbc.EsDriver
+    url: jdbc:es://http://127.0.0.1:9200
   rabbitmq:
     addresses: 127.0.0.1
     port: 5672

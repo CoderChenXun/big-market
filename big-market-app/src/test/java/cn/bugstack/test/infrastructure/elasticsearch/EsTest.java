@@ -1,4 +1,4 @@
-package cn.bugstack.test.es;
+package cn.bugstack.test.infrastructure.elasticsearch;
 
 import cn.bugstack.api.IRaffleActivityService;
 import cn.bugstack.api.dto.ActivityDrawRequestDTO;
