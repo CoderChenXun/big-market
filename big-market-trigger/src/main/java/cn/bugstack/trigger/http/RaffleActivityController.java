@@ -132,7 +132,7 @@ public class RaffleActivityController implements IRaffleActivityService {
             }
             log.info("抽奖开始 userId:{} activityId:{}", request.getUserId(), request.getActivityId());
             // 1.1 降级策略
-            if(! "open".equals(degradeSwitch)){
+            if(StringUtils.isNotBlank(degradeSwitch) &&"open".equals(degradeSwitch)){
                 return Response.<ActivityDrawResponseDTO>builder()
                         .code(ResponseCode.DEGRADE_SWITCH.getCode())
                         .info(ResponseCode.DEGRADE_SWITCH.getInfo())

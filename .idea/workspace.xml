@@ -5,14 +5,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4dafe94-a742-4411-9ae2-20155e05dfbb" name="Changes" comment="fix：修复Maven阿里云仓库问题">
-      <change afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/aop/RateLimiterAOP.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/big-market-types/src/main/java/cn/bugstack/types/annotations/RateLimiterAccessInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/big-market-app/src/test/java/cn/bugstack/test/es/EsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_raffle_activity_order_000.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_raffle_activity_order_001.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_raffle_activity_order_002.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_raffle_activity_order_003.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_user_raffle_order_000.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_user_raffle_order_001.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_user_raffle_order_002.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_01_user_raffle_order_003.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_raffle_activity_order_000.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_raffle_activity_order_001.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_raffle_activity_order_002.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_raffle_activity_order_003.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_user_raffle_order_000.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_user_raffle_order_001.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_user_raffle_order_002.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal-adapter/es7/big_market_02_user_raffle_order_003.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/canal/instance.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/curl/curl_add.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/curl/curl_big_market.raffle_activity_order.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/curl/curl_big_market.user_raffle_order.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/curl/curl_delete.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/docker-compose-app.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/docker-compose-environment-aliyun.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/docker-compose-environment-private.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/docker-compose-environment.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/kibana/config/kibana.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/logstash/logstash.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/my.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market_01.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/big_market_02.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/mysql/sql/nacos.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/rabbitmq/enabled_plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/stop.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/zkCli.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/dev-ops/zookeeper.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-app/src/main/java/cn/bugstack/config/DCCValueBeanFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-trigger/src/main/java/cn/bugstack/trigger/http/RaffleActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/big-market-types/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/big-market-types/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/app/start.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/start.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/app/stop.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-app.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-environment-aliyun.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/docker-compose-environment.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/mysql/sql/create_sql.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/mysql/sql/xfg-frame-archetype.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev-ops/environment/redis/redis.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev-ops/redis/redis.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +105,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/java-project-code/big-market/big-market-app/src/main/resources/mybatis/mapper",
+    "last_opened_file_path": "D:/java-project-code/big-market/docs",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
@@ -86,11 +127,11 @@
       <recent name="cn.bugstack.domain.strategy.model.valobj" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\java-project-code\big-market\docs" />
       <recent name="D:\java-project-code\big-market\big-market-app\src\main\resources\mybatis\mapper" />
       <recent name="D:\java-project-code\big-market\big-market-infrastructure\src\main\java\cn\bugstack\infrastructure\dao" />
       <recent name="D:\java-project-code\big-market\big-market-infrastructure\src\main\java\cn\bugstack\infrastructure\redis" />
       <recent name="D:\java-project-code\big-market\big-market-app\src\main\java\cn\bugstack\config" />
-      <recent name="D:\java-project-code\big-market\docs\dev-ops\mysql\sql" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\java-project-code\big-market\docs\dev-ops\environment" />
@@ -103,50 +144,50 @@
       <recent name="cn.bugstack.domain.rebate.model.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
-    <configuration name="ApiTest.test_rpc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.EsTest.test_draw">
+    <configuration name="EsTest.test_armory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.*" />
+          <option name="PATTERN" value="cn.bugstack.test.es.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.ApiTest" />
-      <option name="METHOD_NAME" value="test_rpc" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.es" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.es.EsTest" />
+      <option name="METHOD_NAME" value="test_armory" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RaffleActivityControllerTest.test_creditPayExchangeSku" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EsTest.test_calendarSignRebate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.trigger.*" />
+          <option name="PATTERN" value="cn.bugstack.test.es.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.trigger" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.trigger.RaffleActivityControllerTest" />
-      <option name="METHOD_NAME" value="test_creditPayExchangeSku" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.es" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.es.EsTest" />
+      <option name="METHOD_NAME" value="test_calendarSignRebate" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RaffleActivityControllerTest.test_querySkuProductListByActivityId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EsTest.test_draw" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="big-market-app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="cn.bugstack.test.trigger.*" />
+          <option name="PATTERN" value="cn.bugstack.test.es.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="cn.bugstack.test.trigger" />
-      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.trigger.RaffleActivityControllerTest" />
-      <option name="METHOD_NAME" value="test_querySkuProductListByActivityId" />
+      <option name="PACKAGE_NAME" value="cn.bugstack.test.es" />
+      <option name="MAIN_CLASS_NAME" value="cn.bugstack.test.es.EsTest" />
+      <option name="METHOD_NAME" value="test_draw" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -193,11 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ApiTest.test_rpc" />
+        <item itemvalue="JUnit.EsTest.test_draw" />
+        <item itemvalue="JUnit.EsTest.test_calendarSignRebate" />
+        <item itemvalue="JUnit.EsTest.test_armory" />
         <item itemvalue="JUnit.RaffleActivitySkuProductServiceTest.test_querySkuProductEntityListByActivityId" />
-        <item itemvalue="JUnit.RaffleActivityControllerTest.test_creditPayExchangeSku" />
         <item itemvalue="JUnit.RaffleActivityControllerTest.test_queryUserCreditAccount" />
-        <item itemvalue="JUnit.RaffleActivityControllerTest.test_querySkuProductListByActivityId" />
       </list>
     </recent_temporary>
   </component>
@@ -389,7 +430,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="260108-coderlan-canal" />
                       </list>
                     </value>
                   </entry>

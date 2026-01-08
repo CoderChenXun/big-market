@@ -1,0 +1,55 @@
+server:
+  port: 8081
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+canal.conf:
+  remoteConfig:
+    enabled: false # 禁用远程配置加载
+  mode: tcp
+  flatMessage: true
+  zookeeperHosts: ""
+  syncBatchSize: 1000
+  retries: -1
+  timeout: 5000
+  accessKey: ""
+  secretKey: ""
+  consumerProperties:
+    canal.tcp.server.host: canal-server:11111
+    canal.tcp.zookeeper.hosts: ""
+    canal.tcp.batch.size: 500
+    canal.tcp.username: ""
+    canal.tcp.password: ""
+
+  # 适配MySQL 8.0.32的数据源配置
+  srcDataSources:
+    big_market_01:
+      # 关键1：补充8.x必需的URL参数
+      # big_market_01 的 URL
+      url: jdbc:mysql://mysql:3306/big_market_01?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+      username: canal
+      password: canal
+      # 关键2：8.x驱动类（替换5.x的com.mysql.jdbc.Driver）
+      driverClassName: com.mysql.cj.jdbc.Driver
+    big_market_02:
+      url: jdbc:mysql://mysql:3306/big_market_02?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true&nullCatalogMeansCurrent=true
+      username: canal
+      password: canal
+      driverClassName: com.mysql.cj.jdbc.Driver
+
+  canalAdapters:
+    - instance: example
+      groups:
+        - groupId: g1
+          outerAdapters:
+            - name: logger
+            - name: es7
+              hosts: elasticsearch:9200
+              properties:
+                mode: rest
+                cluster.name: docker-cluster
+                es.index.auto.create: true
+                es.mapping.id: _id
