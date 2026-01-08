@@ -61,6 +61,13 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
     }
 
     @Override
+    public ActivitySkuStockKeyVO takeQueueValue(Long sku) throws InterruptedException {
+        // 读取阻塞队列的生产者数据，并返回
+        ActivitySkuStockKeyVO activitySkuStockKeyVO = activityRepository.takeQueueValue(sku);
+        return activitySkuStockKeyVO;
+    }
+
+    @Override
     public void updateSkuStock(Long sku) {
         // 根据sku更新库存信息
         activityRepository.updateSkuStock(sku);
@@ -76,6 +83,16 @@ public class RaffleActivityAccountQuotaService extends AbstractRaffleActivityAcc
     public void clearQueueValue() {
         // 清空阻塞队列信息
         activityRepository.clearQueueValue();
+    }
+
+    @Override
+    public void clearQueueValue(Long sku) {
+        activityRepository.clearQueueValue(sku);
+    }
+
+    @Override
+    public List<Long> querySkuList() {
+        return activityRepository.querySkuList();
     }
 
 

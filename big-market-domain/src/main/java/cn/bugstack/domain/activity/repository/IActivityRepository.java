@@ -28,12 +28,15 @@ public interface IActivityRepository {
     void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO);
 
     ActivitySkuStockKeyVO takeQueueValue();
+    ActivitySkuStockKeyVO takeQueueValue(Long sku);
 
     void updateSkuStock(Long sku);
 
     void clearActivitySkuStock(Long sku);
 
     void clearQueueValue();
+
+    void clearQueueValue(Long sku);
 
     UserRaffleOrderEntity queryNoUsedRaffleOrder(PartakeRaffleActivityEntity partakeRaffleActivityEntity);
 
@@ -60,4 +63,6 @@ public interface IActivityRepository {
     List<SkuProductEntity> querySkuProductEntityListByActivityId(Long activityId);
 
     BigDecimal queryUserCreditAccountAmount(String userId);
+
+    List<Long> querySkuList();
 }

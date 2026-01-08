@@ -309,16 +309,24 @@ public class ActivityRepository implements IActivityRepository {
 
     @Override
     public void activitySkuStockConsumeSendQueue(ActivitySkuStockKeyVO activitySkuStockKeyVO) {
-        // 1. 生产sku库存扣减消息
-        String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        // 1. 根据不同的sku生产不同sku库存扣减消息
+        String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY + Constants.UNDERLINE + activitySkuStockKeyVO.getSku();
         RBlockingQueue<Object> blockingQueue = redisService.getBlockingQueue(cachedKey);
         RDelayedQueue<Object> delayedQueue = redisService.getDelayedQueue(blockingQueue);
         delayedQueue.offer(activitySkuStockKeyVO, 3, TimeUnit.SECONDS);
     }
 
     @Override
+    @Deprecated
     public ActivitySkuStockKeyVO takeQueueValue() {
         String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        RBlockingQueue<ActivitySkuStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
+        return blockingQueue.poll();
+    }
+
+    @Override
+    public ActivitySkuStockKeyVO takeQueueValue(Long sku) {
+        String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY + Constants.UNDERLINE + sku;
         RBlockingQueue<ActivitySkuStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
         return blockingQueue.poll();
     }
@@ -334,8 +342,16 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
+    @Deprecated
     public void clearQueueValue() {
         String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY;
+        RBlockingQueue<ActivitySkuStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
+        blockingQueue.clear();
+    }
+
+    @Override
+    public void clearQueueValue(Long sku) {
+        String cachedKey = Constants.RedisKey.ACTIVITY_SKU_COUNT_QUERY_KEY + Constants.UNDERLINE + sku;
         RBlockingQueue<ActivitySkuStockKeyVO> blockingQueue = redisService.getBlockingQueue(cachedKey);
         blockingQueue.clear();
     }
@@ -812,5 +828,10 @@ public class ActivityRepository implements IActivityRepository {
         } finally {
             dbRouter.clear();
         }
+    }
+
+    @Override
+    public List<Long> querySkuList() {
+        return raffleActivitySkuDao.querySkuList();
     }
 }
