@@ -103,13 +103,16 @@ public class StrategyRepository implements IStrategyRepository {
     }
 
     @Override
-    public void storeStrategyAwardSearchRateTables(String key, Integer tableSize, Map<Integer, Integer> shuffleStrategyAwardSearchRateTables) {
+    public <K,V>void storeStrategyAwardSearchRateTables(String key, Integer tableSize, Map<K,V> shuffleStrategyAwardSearchRateTables) {
         // 1. 首先保存tableSize到redis中
         String cachedTableSizeKey = Constants.RedisKey.STRATEGY_RATE_RANGE_KEY + key;
         redisService.setValue(cachedTableSizeKey, tableSize);
         // 2. 保存概率表
         String cachedRateTableKey = Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key;
-        Map<Integer, Integer> cacheTableMap = redisService.getMap(cachedRateTableKey);
+        if(redisService.isExists(cachedRateTableKey)){
+            redisService.remove(cachedRateTableKey);
+        }
+        Map<K,V> cacheTableMap = redisService.getMap(cachedRateTableKey);
         cacheTableMap.putAll(shuffleStrategyAwardSearchRateTables);
     }
 
@@ -486,5 +489,31 @@ public class StrategyRepository implements IStrategyRepository {
                 .collect(Collectors.toList());
 
         return strategyAwardStockKeyVOS;
+    }
+
+    @Override
+    public <K, V> Map<K, V> getMap(String key) {
+        String cachedKey = Constants.RedisKey.STRATEGY_RATE_TABLE_KEY + key;
+        return redisService.getMap(cachedKey);
+    }
+
+    @Override
+    public void cacheStrategyArmoryAlgorithm(String key, String AlgorithmName) {
+        // 缓存抽奖策略算法到Redis
+        String cachedKey = Constants.RedisKey.STRATEGY_ARMORY_ALGORITHM_KEY + key;
+        if(redisService.isExists(cachedKey)){
+            redisService.remove(cachedKey);
+        }
+        // 缓存数据
+        redisService.setValue(cachedKey, AlgorithmName);
+    }
+
+    @Override
+    public String queryStrategyArmoryAlgorithm(String key) {
+        String cachedKey = Constants.RedisKey.STRATEGY_ARMORY_ALGORITHM_KEY + key;
+        if(!redisService.isExists(cachedKey)){
+            return null;
+        }
+        return redisService.getValue(cachedKey);
     }
 }

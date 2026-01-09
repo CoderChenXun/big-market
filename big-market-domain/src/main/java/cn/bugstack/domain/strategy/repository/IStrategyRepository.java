@@ -15,7 +15,7 @@ import java.util.Map;
 public interface IStrategyRepository {
     List<StrategyAwardEntity> queryStrategyAwardListByStrategyId(Long strategyId);
 
-    void storeStrategyAwardSearchRateTables(String key, Integer tableSize, Map<Integer, Integer> shuffleStrategyAwardSearchRateTables);
+    <K, V>void storeStrategyAwardSearchRateTables(String key, Integer tableSize, Map<K,V> shuffleStrategyAwardSearchRateTables);
 
     int getRateRange(String key);
 
@@ -61,4 +61,10 @@ public interface IStrategyRepository {
     Integer queryUserRaffleCount(String userId, Long strategyId);
 
     List<StrategyAwardStockKeyVO> queryOpenActivityStrategyAwardList();
+
+    <K,V> Map<K, V> getMap(String key);
+
+    void cacheStrategyArmoryAlgorithm(String key, String AlgorithmName);
+
+    String queryStrategyArmoryAlgorithm(String key);
 }
